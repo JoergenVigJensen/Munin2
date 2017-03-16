@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Security.AccessControl;
-using System.Text;
-using System.Threading.Tasks;
-using Munin.DAL;
 
 namespace Munin.DAL.Models
 {
@@ -25,6 +21,18 @@ namespace Munin.DAL.Models
         public int Count { get; set; }
 
         public int Regs { get; set; }
-        
+
+        public virtual Provider Provider { get; set; }
+
+        public ICollection<Picture> PirPictures = new HashSet<Picture>();
+
+        public ICollection<Book> Books = new HashSet<Book>();
+
+        public ICollection<Map> Maps = new HashSet<Map>();
+
+        public ICollection<Sequence> Sequences = new HashSet<Sequence>();
+
+        public ICollection<ArchiveDocument> ArchiveDocuments = new HashSet<ArchiveDocument>();
+
     }
 }

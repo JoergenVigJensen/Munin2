@@ -51,10 +51,17 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Models\Archive.cs" />
+    <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\Cadaster.cs" />
+    <Compile Include="Models\ChirchRecord.cs" />
     <Compile Include="Models\Clip.cs" />
+    <Compile Include="Models\Map.cs" />
     <Compile Include="Models\Picture.cs" />
+    <Compile Include="Models\Provider.cs" />
+    <Compile Include="Models\Sequence.cs" />
     <Compile Include="MuninDb.cs" />
-    <Compile Include="Models\Document.cs" />
+    <Compile Include="Models\ArchiveDocument.cs" />
     <Compile Include="Models\Journal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

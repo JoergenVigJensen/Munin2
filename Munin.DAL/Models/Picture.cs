@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Munin.DAL.Models
 {
@@ -43,6 +38,6 @@ namespace Munin.DAL.Models
         public bool Provision { get; set; }
 
         public DateTime DateTime { get; set; }
-        public string Note { get; set; }
+        public string Comment { get; set; }
     }
 }
