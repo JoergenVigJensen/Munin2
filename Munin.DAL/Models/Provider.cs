@@ -12,11 +12,11 @@ namespace Munin.DAL.Models
     {
         public int ProviderId { get; set; }
 
-        public virtual ICollection<Journal> Journals { get; set; } = new HashSet<Journal>();
+        public virtual Journal Journal { get; set; }
 
         public string Name { get; set; }
 
-        public string Art { get; set; }
+        public string Att { get; set; }
 
         public string Address { get; set; }
 

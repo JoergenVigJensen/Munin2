@@ -1,0 +1,1352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ILABModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.ArkfondTypes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ArkfondTypes">
+          <Key>
+            <PropertyRef Name="TypeKey" />
+          </Key>
+          <Property Name="TypeKey" Type="int" Nullable="false" />
+          <Property Name="TypeConst" Type="nvarchar" MaxLength="2" />
+          <Property Name="TypeText" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.Arkivalie' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Arkivalie">
+          <Key>
+            <PropertyRef Name="ArkivalieID" />
+            <PropertyRef Name="Klausul" />
+          </Key>
+          <Property Name="ArkivalieID" Type="int" Nullable="false" />
+          <Property Name="Journal" Type="nvarchar" MaxLength="10" />
+          <Property Name="Arkivfondnr" Type="nvarchar" MaxLength="10" />
+          <Property Name="Art" Type="nvarchar" MaxLength="50" />
+          <Property Name="KasseNr" Type="nvarchar" MaxLength="50" />
+          <Property Name="Signatur" Type="nvarchar" MaxLength="1" />
+          <Property Name="Klausul" Type="bit" Nullable="false" />
+          <Property Name="YderAarStart" Type="float" />
+          <Property Name="YderAarSlut" Type="float" />
+          <Property Name="Omfang" Type="nvarchar" MaxLength="10" />
+          <Property Name="AntKort" Type="float" />
+          <Property Name="Indlevering" Type="nvarchar" MaxLength="1" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.ArkivFond' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ArkivFond">
+          <Key>
+            <PropertyRef Name="ArkivfondID" />
+          </Key>
+          <Property Name="ArkivfondID" Type="int" Nullable="false" />
+          <Property Name="ArkivNr" Type="nvarchar" MaxLength="50" />
+          <Property Name="ArkivNavn" Type="nvarchar" MaxLength="100" />
+          <Property Name="ArkivDef" Type="nvarchar" MaxLength="100" />
+          <Property Name="ArkivType" Type="nvarchar" MaxLength="1" />
+          <Property Name="StiftetDay" Type="float" />
+          <Property Name="StiftetMonth" Type="float" />
+          <Property Name="StiftetYear" Type="float" />
+          <Property Name="AfsluttetDay" Type="float" />
+          <Property Name="AfsluttetMonth" Type="float" />
+          <Property Name="AfsluttetYear" Type="float" />
+          <Property Name="Adresse" Type="nvarchar" MaxLength="100" />
+          <Property Name="Postnr" Type="nvarchar" MaxLength="10" />
+          <Property Name="By" Type="nvarchar" MaxLength="100" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.Aviser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Aviser">
+          <Key>
+            <PropertyRef Name="AvisID" />
+          </Key>
+          <Property Name="AvisID" Type="int" Nullable="false" />
+          <Property Name="Aviskode" Type="nvarchar" MaxLength="10" />
+          <Property Name="Avisnavn" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.Bibliotek' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Bibliotek">
+          <Key>
+            <PropertyRef Name="BogID" />
+          </Key>
+          <Property Name="BogID" Type="int" Nullable="false" />
+          <Property Name="Bogkode" Type="nvarchar" MaxLength="10" />
+          <Property Name="Journal" Type="nvarchar" MaxLength="10" />
+          <Property Name="DK5" Type="nvarchar" MaxLength="10" />
+          <Property Name="Ordningsord" Type="nvarchar" MaxLength="100" />
+          <Property Name="Titel" Type="nvarchar" MaxLength="100" />
+          <Property Name="Undertitel" Type="nvarchar" MaxLength="100" />
+          <Property Name="Redaktor" Type="nvarchar" MaxLength="100" />
+          <Property Name="Forfatter" Type="nvarchar" MaxLength="100" />
+          <Property Name="Udgivet" Type="float" />
+          <Property Name="Forlag" Type="nvarchar" MaxLength="50" />
+          <Property Name="Samlemappe" Type="nvarchar" MaxLength="100" />
+          <Property Name="Indlevering" Type="nvarchar" MaxLength="1" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.Billeder' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Billeder">
+          <Key>
+            <PropertyRef Name="BilledID" />
+            <PropertyRef Name="Ophavsret" />
+            <PropertyRef Name="Klausul" />
+          </Key>
+          <Property Name="BilledID" Type="int" Nullable="false" />
+          <Property Name="Journal" Type="nvarchar" MaxLength="10" />
+          <Property Name="Billedindex" Type="nvarchar" MaxLength="10" />
+          <Property Name="Numordning" Type="nvarchar" MaxLength="10" />
+          <Property Name="Ordning" Type="nvarchar" MaxLength="50" />
+          <Property Name="CDnr" Type="nvarchar" MaxLength="50" />
+          <Property Name="Fotograf" Type="nvarchar" MaxLength="100" />
+          <Property Name="Format" Type="nvarchar" MaxLength="50" />
+          <Property Name="Materiale" Type="float" />
+          <Property Name="Placering" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ophavsret" Type="bit" Nullable="false" />
+          <Property Name="Klausul" Type="bit" Nullable="false" />
+          <Property Name="Datering" Type="datetime" />
+          <Property Name="Indlevering" Type="nvarchar" MaxLength="1" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.EventKoder' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="EventKoder">
+          <Key>
+            <PropertyRef Name="EventkodeID" />
+          </Key>
+          <Property Name="EventkodeID" Type="int" Nullable="false" />
+          <Property Name="Eventkode" Type="nvarchar" MaxLength="10" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.Events' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="int" Nullable="false" />
+          <Property Name="PersonID" Type="float" />
+          <Property Name="Ind_Dag" Type="float" />
+          <Property Name="Ind_Mrd" Type="float" />
+          <Property Name="Ind_Aar" Type="float" />
+          <Property Name="Eventkode" Type="nvarchar" MaxLength="20" />
+          <Property Name="InstKode" Type="nvarchar" MaxLength="20" />
+          <Property Name="Tekstfelt1" Type="nvarchar" MaxLength="100" />
+          <Property Name="Tekstfelt2" Type="nvarchar" MaxLength="100" />
+          <Property Name="Tekstfelt3" Type="nvarchar" MaxLength="100" />
+          <Property Name="Tekstfelt4" Type="nvarchar" MaxLength="100" />
+          <Property Name="Tekstfelt5" Type="nvarchar" MaxLength="100" />
+          <Property Name="Tekstfelt6" Type="nvarchar" MaxLength="100" />
+          <Property Name="Tekstfelt7" Type="nvarchar" MaxLength="100" />
+          <Property Name="Tekstfelt8" Type="nvarchar" MaxLength="100" />
+          <Property Name="Tekstfelt9" Type="nvarchar" MaxLength="100" />
+          <Property Name="Tekstfelt10" Type="nvarchar" MaxLength="100" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.Giver' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Giver">
+          <Key>
+            <PropertyRef Name="GiverID" />
+          </Key>
+          <Property Name="GiverID" Type="int" Nullable="false" />
+          <Property Name="Journal" Type="nvarchar" MaxLength="10" />
+          <Property Name="Navn" Type="nvarchar" MaxLength="100" />
+          <Property Name="Att" Type="nvarchar" MaxLength="100" />
+          <Property Name="Adresse" Type="nvarchar" MaxLength="100" />
+          <Property Name="Postnr" Type="nvarchar" MaxLength="10" />
+          <Property Name="By" Type="nvarchar" MaxLength="100" />
+          <Property Name="AflevDato" Type="datetime" />
+          <Property Name="Registrator" Type="nvarchar" MaxLength="100" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ILABClassic.dbo.Indsætningsfejl' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Indsætningsfejl">
+          <Property Name="MAPPE" Type="nvarchar(max)" />
+          <Property Name="OVERSKRIFT" Type="nvarchar(max)" />
+          <Property Name="NYDATO" Type="nvarchar(max)" />
+          <Property Name="AVISKODE" Type="nvarchar(max)" />
+          <Property Name="BEM1" Type="nvarchar(max)" />
+          <Property Name="BEM2" Type="nvarchar(max)" />
+          <Property Name="BEM3" Type="nvarchar(max)" />
+          <Property Name="BEM4" Type="nvarchar(max)" />
+          <Property Name="BEM5" Type="nvarchar(max)" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.institution' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="institution">
+          <Key>
+            <PropertyRef Name="InstID" />
+          </Key>
+          <Property Name="InstID" Type="int" Nullable="false" />
+          <Property Name="InstKode" Type="nvarchar" MaxLength="4" />
+          <Property Name="Navn" Type="nvarchar" MaxLength="100" />
+          <Property Name="Gade" Type="nvarchar" MaxLength="100" />
+          <Property Name="Nr" Type="nvarchar" MaxLength="10" />
+          <Property Name="Sted" Type="nvarchar" MaxLength="100" />
+          <Property Name="Postnr" Type="nvarchar" MaxLength="10" />
+          <Property Name="Stiftet" Type="datetime" />
+          <Property Name="Afsluttet" Type="datetime" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.Journaler' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Journaler">
+          <Key>
+            <PropertyRef Name="JournalKey" />
+          </Key>
+          <Property Name="JournalKey" Type="int" Nullable="false" />
+          <Property Name="JournalID" Type="nvarchar" MaxLength="10" />
+          <Property Name="Afleveret" Type="datetime" />
+          <Property Name="MedieArt" Type="nvarchar" MaxLength="100" />
+          <Property Name="Antal" Type="float" />
+          <Property Name="Regs" Type="float" />
+          <Property Name="Note" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ILABClassic.dbo.JournalsekvensUpdate' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="JournalsekvensUpdate">
+          <Property Name="Journal" Type="nvarchar" MaxLength="10" />
+          <Property Name="aflevdato" Type="datetime" />
+          <Property Name="regs" Type="int" />
+          <Property Name="antal" Type="int" />
+          <Property Name="Medieart" Type="nvarchar" MaxLength="255" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.Kirkebog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Kirkebog">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="Fornavn" Type="nvarchar" MaxLength="100" />
+          <Property Name="Efternavn" Type="nvarchar" MaxLength="100" />
+          <Property Name="Ind_dato" Type="nvarchar" MaxLength="20" />
+          <Property Name="Kirkehandling" Type="nvarchar" MaxLength="1" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.Kopi af ArkivFond' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Kopi af ArkivFond">
+          <Key>
+            <PropertyRef Name="ArkivfondID" />
+          </Key>
+          <Property Name="ArkivfondID" Type="int" Nullable="false" />
+          <Property Name="ArkivNr" Type="nvarchar" MaxLength="50" />
+          <Property Name="ArkivNavn" Type="nvarchar" MaxLength="100" />
+          <Property Name="ArkivDef" Type="nvarchar" MaxLength="100" />
+          <Property Name="ArkivType" Type="nvarchar" MaxLength="1" />
+          <Property Name="StiftetDay" Type="float" />
+          <Property Name="StiftetMonth" Type="float" />
+          <Property Name="StiftetYear" Type="float" />
+          <Property Name="AfsluttetDay" Type="float" />
+          <Property Name="AfsluttetMonth" Type="float" />
+          <Property Name="AfsluttetYear" Type="float" />
+          <Property Name="Adresse" Type="nvarchar" MaxLength="100" />
+          <Property Name="Postnr" Type="nvarchar" MaxLength="10" />
+          <Property Name="By" Type="nvarchar" MaxLength="100" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.Kort' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Kort">
+          <Key>
+            <PropertyRef Name="KortID" />
+          </Key>
+          <Property Name="KortID" Type="int" Nullable="false" />
+          <Property Name="Kortnr" Type="nvarchar" MaxLength="10" />
+          <Property Name="Journal" Type="nvarchar" MaxLength="10" />
+          <Property Name="Navn" Type="nvarchar" MaxLength="100" />
+          <Property Name="KortType" Type="nvarchar" MaxLength="100" />
+          <Property Name="Propertion" Type="nvarchar" MaxLength="100" />
+          <Property Name="Udgiver" Type="nvarchar" MaxLength="100" />
+          <Property Name="DateringAar" Type="int" />
+          <Property Name="RevAar" Type="int" />
+          <Property Name="Omraade" Type="nvarchar" MaxLength="100" />
+          <Property Name="Depot" Type="nvarchar" MaxLength="100" />
+          <Property Name="Format" Type="nvarchar" MaxLength="100" />
+          <Property Name="Materiale" Type="nvarchar" MaxLength="100" />
+          <Property Name="Indlevering" Type="nvarchar" MaxLength="1" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.MatrikelSted' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MatrikelSted">
+          <Key>
+            <PropertyRef Name="MatrikelID" />
+          </Key>
+          <Property Name="MatrikelID" Type="int" Nullable="false" />
+          <Property Name="MatSted" Type="nvarchar" MaxLength="100" />
+          <Property Name="StedNavn" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.Matrikler' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Matrikler">
+          <Key>
+            <PropertyRef Name="MatrikelID" />
+          </Key>
+          <Property Name="MatrikelID" Type="int" Nullable="false" />
+          <Property Name="MatrikelNr" Type="nvarchar" MaxLength="100" />
+          <Property Name="Kilde" Type="nvarchar" MaxLength="100" />
+          <Property Name="Oprettet" Type="nvarchar" MaxLength="10" />
+          <Property Name="Dato" Type="nvarchar" MaxLength="10" />
+          <Property Name="Stamnr" Type="nvarchar" MaxLength="20" />
+          <Property Name="Ejer" Type="nvarchar" MaxLength="100" />
+          <Property Name="Bruger" Type="nvarchar" MaxLength="100" />
+          <Property Name="Vejnavn" Type="nvarchar" MaxLength="100" />
+          <Property Name="Vejnr" Type="nvarchar" MaxLength="10" />
+          <Property Name="Sted" Type="nvarchar" MaxLength="100" />
+          <Property Name="Postnr" Type="nvarchar" MaxLength="5" />
+          <Property Name="By" Type="nvarchar" MaxLength="50" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.Personer' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Personer">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="int" Nullable="false" />
+          <Property Name="Fornavn" Type="nvarchar" MaxLength="100" />
+          <Property Name="Mellemnavn" Type="nvarchar" MaxLength="100" />
+          <Property Name="Pigenavn" Type="nvarchar" MaxLength="100" />
+          <Property Name="Efternavn" Type="nvarchar" MaxLength="100" />
+          <Property Name="Ind_Dag" Type="float" />
+          <Property Name="Ind_Mrd" Type="float" />
+          <Property Name="Ind_Aar" Type="float" />
+          <Property Name="Adresse_Vej" Type="nvarchar" MaxLength="100" />
+          <Property Name="Adresse_nr" Type="nvarchar" MaxLength="10" />
+          <Property Name="Adresse_Sted" Type="nvarchar" MaxLength="100" />
+          <Property Name="Adresse_Postnr" Type="nvarchar" MaxLength="5" />
+          <Property Name="Adresse_PostBy" Type="nvarchar" MaxLength="50" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.Sekvenser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Sekvenser">
+          <Key>
+            <PropertyRef Name="SekvensID" />
+            <PropertyRef Name="Klausul" />
+          </Key>
+          <Property Name="SekvensID" Type="int" Nullable="false" />
+          <Property Name="SekvensNr" Type="nvarchar" MaxLength="10" />
+          <Property Name="Journal" Type="nvarchar" MaxLength="10" />
+          <Property Name="Titel" Type="nvarchar" MaxLength="100" />
+          <Property Name="DateringDag" Type="float" />
+          <Property Name="DateringMrd" Type="float" />
+          <Property Name="DateringAar" Type="float" />
+          <Property Name="Kilde" Type="nvarchar" MaxLength="100" />
+          <Property Name="Interviewer" Type="nvarchar" MaxLength="100" />
+          <Property Name="Klausul" Type="bit" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" />
+          <Property Name="Indlevering" Type="nvarchar" MaxLength="1" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ILABClassic.dbo.SKOLEFIL' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SKOLEFIL">
+          <Property Name="KODE" Type="nvarchar" MaxLength="2" />
+          <Property Name="SKOLE_NAVN" Type="nvarchar" MaxLength="20" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'ILABClassic.dbo.Sognegade' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="Sognegade">
+          <Property Name="GADENAVN" Type="nvarchar" MaxLength="30" />
+          <Property Name="ARKIVNR" Type="nvarchar" MaxLength="6" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.udklip' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="udklip">
+          <Key>
+            <PropertyRef Name="UdklipsID" />
+          </Key>
+          <Property Name="UdklipsID" Type="int" Nullable="false" />
+          <Property Name="Mappe" Type="nvarchar" MaxLength="50" />
+          <Property Name="Overskrift" Type="nvarchar" MaxLength="50" />
+          <Property Name="Datering" Type="nvarchar" MaxLength="20" />
+          <Property Name="Aviskode" Type="nvarchar" MaxLength="5" />
+          <Property Name="Note" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ILABClassic.dbo.UserTbl' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="UserTbl">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Initials" Type="nvarchar" MaxLength="10" />
+          <Property Name="Username" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserPwd" Type="nvarchar" MaxLength="100" />
+          <Property Name="Accesslevel" Type="float" />
+        </EntityType>
+        <EntityContainer Name="ILABModelStoreContainer">
+          <EntitySet Name="ArkfondTypes" EntityType="Self.ArkfondTypes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ArkfondTypes].[TypeKey] AS [TypeKey], 
+    [ArkfondTypes].[TypeConst] AS [TypeConst], 
+    [ArkfondTypes].[TypeText] AS [TypeText]
+    FROM [dbo].[ArkfondTypes] AS [ArkfondTypes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Arkivalie" EntityType="Self.Arkivalie" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Arkivalie].[ArkivalieID] AS [ArkivalieID], 
+    [Arkivalie].[Journal] AS [Journal], 
+    [Arkivalie].[Arkivfondnr] AS [Arkivfondnr], 
+    [Arkivalie].[Art] AS [Art], 
+    [Arkivalie].[KasseNr] AS [KasseNr], 
+    [Arkivalie].[Signatur] AS [Signatur], 
+    [Arkivalie].[Klausul] AS [Klausul], 
+    [Arkivalie].[YderAarStart] AS [YderAarStart], 
+    [Arkivalie].[YderAarSlut] AS [YderAarSlut], 
+    [Arkivalie].[Omfang] AS [Omfang], 
+    [Arkivalie].[AntKort] AS [AntKort], 
+    [Arkivalie].[Indlevering] AS [Indlevering], 
+    [Arkivalie].[Note] AS [Note]
+    FROM [dbo].[Arkivalie] AS [Arkivalie]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ArkivFond" EntityType="Self.ArkivFond" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ArkivFond].[ArkivfondID] AS [ArkivfondID], 
+    [ArkivFond].[ArkivNr] AS [ArkivNr], 
+    [ArkivFond].[ArkivNavn] AS [ArkivNavn], 
+    [ArkivFond].[ArkivDef] AS [ArkivDef], 
+    [ArkivFond].[ArkivType] AS [ArkivType], 
+    [ArkivFond].[StiftetDay] AS [StiftetDay], 
+    [ArkivFond].[StiftetMonth] AS [StiftetMonth], 
+    [ArkivFond].[StiftetYear] AS [StiftetYear], 
+    [ArkivFond].[AfsluttetDay] AS [AfsluttetDay], 
+    [ArkivFond].[AfsluttetMonth] AS [AfsluttetMonth], 
+    [ArkivFond].[AfsluttetYear] AS [AfsluttetYear], 
+    [ArkivFond].[Adresse] AS [Adresse], 
+    [ArkivFond].[Postnr] AS [Postnr], 
+    [ArkivFond].[By] AS [By], 
+    [ArkivFond].[Note] AS [Note]
+    FROM [dbo].[ArkivFond] AS [ArkivFond]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Aviser" EntityType="Self.Aviser" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Aviser].[AvisID] AS [AvisID], 
+    [Aviser].[Aviskode] AS [Aviskode], 
+    [Aviser].[Avisnavn] AS [Avisnavn]
+    FROM [dbo].[Aviser] AS [Aviser]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Bibliotek" EntityType="Self.Bibliotek" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Bibliotek].[BogID] AS [BogID], 
+    [Bibliotek].[Bogkode] AS [Bogkode], 
+    [Bibliotek].[Journal] AS [Journal], 
+    [Bibliotek].[DK5] AS [DK5], 
+    [Bibliotek].[Ordningsord] AS [Ordningsord], 
+    [Bibliotek].[Titel] AS [Titel], 
+    [Bibliotek].[Undertitel] AS [Undertitel], 
+    [Bibliotek].[Redaktor] AS [Redaktor], 
+    [Bibliotek].[Forfatter] AS [Forfatter], 
+    [Bibliotek].[Udgivet] AS [Udgivet], 
+    [Bibliotek].[Forlag] AS [Forlag], 
+    [Bibliotek].[Samlemappe] AS [Samlemappe], 
+    [Bibliotek].[Indlevering] AS [Indlevering], 
+    [Bibliotek].[Note] AS [Note]
+    FROM [dbo].[Bibliotek] AS [Bibliotek]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Billeder" EntityType="Self.Billeder" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Billeder].[BilledID] AS [BilledID], 
+    [Billeder].[Journal] AS [Journal], 
+    [Billeder].[Billedindex] AS [Billedindex], 
+    [Billeder].[Numordning] AS [Numordning], 
+    [Billeder].[Ordning] AS [Ordning], 
+    [Billeder].[CDnr] AS [CDnr], 
+    [Billeder].[Fotograf] AS [Fotograf], 
+    [Billeder].[Format] AS [Format], 
+    [Billeder].[Materiale] AS [Materiale], 
+    [Billeder].[Placering] AS [Placering], 
+    [Billeder].[Ophavsret] AS [Ophavsret], 
+    [Billeder].[Klausul] AS [Klausul], 
+    [Billeder].[Datering] AS [Datering], 
+    [Billeder].[Indlevering] AS [Indlevering], 
+    [Billeder].[Note] AS [Note]
+    FROM [dbo].[Billeder] AS [Billeder]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="EventKoder" EntityType="Self.EventKoder" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [EventKoder].[EventkodeID] AS [EventkodeID], 
+    [EventKoder].[Eventkode] AS [Eventkode], 
+    [EventKoder].[Note] AS [Note]
+    FROM [dbo].[EventKoder] AS [EventKoder]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Events" EntityType="Self.Events" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Events].[EventID] AS [EventID], 
+    [Events].[PersonID] AS [PersonID], 
+    [Events].[Ind_Dag] AS [Ind_Dag], 
+    [Events].[Ind_Mrd] AS [Ind_Mrd], 
+    [Events].[Ind_Aar] AS [Ind_Aar], 
+    [Events].[Eventkode] AS [Eventkode], 
+    [Events].[InstKode] AS [InstKode], 
+    [Events].[Tekstfelt1] AS [Tekstfelt1], 
+    [Events].[Tekstfelt2] AS [Tekstfelt2], 
+    [Events].[Tekstfelt3] AS [Tekstfelt3], 
+    [Events].[Tekstfelt4] AS [Tekstfelt4], 
+    [Events].[Tekstfelt5] AS [Tekstfelt5], 
+    [Events].[Tekstfelt6] AS [Tekstfelt6], 
+    [Events].[Tekstfelt7] AS [Tekstfelt7], 
+    [Events].[Tekstfelt8] AS [Tekstfelt8], 
+    [Events].[Tekstfelt9] AS [Tekstfelt9], 
+    [Events].[Tekstfelt10] AS [Tekstfelt10], 
+    [Events].[Note] AS [Note]
+    FROM [dbo].[Events] AS [Events]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Giver" EntityType="Self.Giver" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Giver].[GiverID] AS [GiverID], 
+    [Giver].[Journal] AS [Journal], 
+    [Giver].[Navn] AS [Navn], 
+    [Giver].[Att] AS [Att], 
+    [Giver].[Adresse] AS [Adresse], 
+    [Giver].[Postnr] AS [Postnr], 
+    [Giver].[By] AS [By], 
+    [Giver].[AflevDato] AS [AflevDato], 
+    [Giver].[Registrator] AS [Registrator], 
+    [Giver].[Note] AS [Note]
+    FROM [dbo].[Giver] AS [Giver]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="institution" EntityType="Self.institution" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [institution].[InstID] AS [InstID], 
+    [institution].[InstKode] AS [InstKode], 
+    [institution].[Navn] AS [Navn], 
+    [institution].[Gade] AS [Gade], 
+    [institution].[Nr] AS [Nr], 
+    [institution].[Sted] AS [Sted], 
+    [institution].[Postnr] AS [Postnr], 
+    [institution].[Stiftet] AS [Stiftet], 
+    [institution].[Afsluttet] AS [Afsluttet], 
+    [institution].[Note] AS [Note]
+    FROM [dbo].[institution] AS [institution]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Journaler" EntityType="Self.Journaler" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Journaler].[JournalKey] AS [JournalKey], 
+    [Journaler].[JournalID] AS [JournalID], 
+    [Journaler].[Afleveret] AS [Afleveret], 
+    [Journaler].[MedieArt] AS [MedieArt], 
+    [Journaler].[Antal] AS [Antal], 
+    [Journaler].[Regs] AS [Regs], 
+    [Journaler].[Note] AS [Note]
+    FROM [dbo].[Journaler] AS [Journaler]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Kirkebog" EntityType="Self.Kirkebog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Kirkebog].[PersonID] AS [PersonID], 
+    [Kirkebog].[Fornavn] AS [Fornavn], 
+    [Kirkebog].[Efternavn] AS [Efternavn], 
+    [Kirkebog].[Ind_dato] AS [Ind_dato], 
+    [Kirkebog].[Kirkehandling] AS [Kirkehandling]
+    FROM [dbo].[Kirkebog] AS [Kirkebog]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Kopi af ArkivFond" EntityType="Self.Kopi af ArkivFond" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Kopi af ArkivFond].[ArkivfondID] AS [ArkivfondID], 
+    [Kopi af ArkivFond].[ArkivNr] AS [ArkivNr], 
+    [Kopi af ArkivFond].[ArkivNavn] AS [ArkivNavn], 
+    [Kopi af ArkivFond].[ArkivDef] AS [ArkivDef], 
+    [Kopi af ArkivFond].[ArkivType] AS [ArkivType], 
+    [Kopi af ArkivFond].[StiftetDay] AS [StiftetDay], 
+    [Kopi af ArkivFond].[StiftetMonth] AS [StiftetMonth], 
+    [Kopi af ArkivFond].[StiftetYear] AS [StiftetYear], 
+    [Kopi af ArkivFond].[AfsluttetDay] AS [AfsluttetDay], 
+    [Kopi af ArkivFond].[AfsluttetMonth] AS [AfsluttetMonth], 
+    [Kopi af ArkivFond].[AfsluttetYear] AS [AfsluttetYear], 
+    [Kopi af ArkivFond].[Adresse] AS [Adresse], 
+    [Kopi af ArkivFond].[Postnr] AS [Postnr], 
+    [Kopi af ArkivFond].[By] AS [By], 
+    [Kopi af ArkivFond].[Note] AS [Note]
+    FROM [dbo].[Kopi af ArkivFond] AS [Kopi af ArkivFond]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Kort" EntityType="Self.Kort" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Kort].[KortID] AS [KortID], 
+    [Kort].[Kortnr] AS [Kortnr], 
+    [Kort].[Journal] AS [Journal], 
+    [Kort].[Navn] AS [Navn], 
+    [Kort].[KortType] AS [KortType], 
+    [Kort].[Propertion] AS [Propertion], 
+    [Kort].[Udgiver] AS [Udgiver], 
+    [Kort].[DateringAar] AS [DateringAar], 
+    [Kort].[RevAar] AS [RevAar], 
+    [Kort].[Omraade] AS [Omraade], 
+    [Kort].[Depot] AS [Depot], 
+    [Kort].[Format] AS [Format], 
+    [Kort].[Materiale] AS [Materiale], 
+    [Kort].[Indlevering] AS [Indlevering], 
+    [Kort].[Note] AS [Note]
+    FROM [dbo].[Kort] AS [Kort]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MatrikelSted" EntityType="Self.MatrikelSted" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MatrikelSted].[MatrikelID] AS [MatrikelID], 
+    [MatrikelSted].[MatSted] AS [MatSted], 
+    [MatrikelSted].[StedNavn] AS [StedNavn]
+    FROM [dbo].[MatrikelSted] AS [MatrikelSted]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Matrikler" EntityType="Self.Matrikler" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Matrikler].[MatrikelID] AS [MatrikelID], 
+    [Matrikler].[MatrikelNr] AS [MatrikelNr], 
+    [Matrikler].[Kilde] AS [Kilde], 
+    [Matrikler].[Oprettet] AS [Oprettet], 
+    [Matrikler].[Dato] AS [Dato], 
+    [Matrikler].[Stamnr] AS [Stamnr], 
+    [Matrikler].[Ejer] AS [Ejer], 
+    [Matrikler].[Bruger] AS [Bruger], 
+    [Matrikler].[Vejnavn] AS [Vejnavn], 
+    [Matrikler].[Vejnr] AS [Vejnr], 
+    [Matrikler].[Sted] AS [Sted], 
+    [Matrikler].[Postnr] AS [Postnr], 
+    [Matrikler].[By] AS [By], 
+    [Matrikler].[Note] AS [Note]
+    FROM [dbo].[Matrikler] AS [Matrikler]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Personer" EntityType="Self.Personer" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Personer].[PersonID] AS [PersonID], 
+    [Personer].[Fornavn] AS [Fornavn], 
+    [Personer].[Mellemnavn] AS [Mellemnavn], 
+    [Personer].[Pigenavn] AS [Pigenavn], 
+    [Personer].[Efternavn] AS [Efternavn], 
+    [Personer].[Ind_Dag] AS [Ind_Dag], 
+    [Personer].[Ind_Mrd] AS [Ind_Mrd], 
+    [Personer].[Ind_Aar] AS [Ind_Aar], 
+    [Personer].[Adresse_Vej] AS [Adresse_Vej], 
+    [Personer].[Adresse_nr] AS [Adresse_nr], 
+    [Personer].[Adresse_Sted] AS [Adresse_Sted], 
+    [Personer].[Adresse_Postnr] AS [Adresse_Postnr], 
+    [Personer].[Adresse_PostBy] AS [Adresse_PostBy], 
+    [Personer].[Note] AS [Note]
+    FROM [dbo].[Personer] AS [Personer]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Sekvenser" EntityType="Self.Sekvenser" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Sekvenser].[SekvensID] AS [SekvensID], 
+    [Sekvenser].[SekvensNr] AS [SekvensNr], 
+    [Sekvenser].[Journal] AS [Journal], 
+    [Sekvenser].[Titel] AS [Titel], 
+    [Sekvenser].[DateringDag] AS [DateringDag], 
+    [Sekvenser].[DateringMrd] AS [DateringMrd], 
+    [Sekvenser].[DateringAar] AS [DateringAar], 
+    [Sekvenser].[Kilde] AS [Kilde], 
+    [Sekvenser].[Interviewer] AS [Interviewer], 
+    [Sekvenser].[Klausul] AS [Klausul], 
+    [Sekvenser].[Type] AS [Type], 
+    [Sekvenser].[Indlevering] AS [Indlevering], 
+    [Sekvenser].[Note] AS [Note]
+    FROM [dbo].[Sekvenser] AS [Sekvenser]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="udklip" EntityType="Self.udklip" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [udklip].[UdklipsID] AS [UdklipsID], 
+    [udklip].[Mappe] AS [Mappe], 
+    [udklip].[Overskrift] AS [Overskrift], 
+    [udklip].[Datering] AS [Datering], 
+    [udklip].[Aviskode] AS [Aviskode], 
+    [udklip].[Note] AS [Note]
+    FROM [dbo].[udklip] AS [udklip]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="UserTbl" EntityType="Self.UserTbl" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UserTbl].[UserID] AS [UserID], 
+    [UserTbl].[Initials] AS [Initials], 
+    [UserTbl].[Username] AS [Username], 
+    [UserTbl].[UserPwd] AS [UserPwd], 
+    [UserTbl].[Accesslevel] AS [Accesslevel]
+    FROM [dbo].[UserTbl] AS [UserTbl]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ILABModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ArkfondTypes">
+          <Key>
+            <PropertyRef Name="TypeKey" />
+          </Key>
+          <Property Name="TypeKey" Type="Int32" Nullable="false" />
+          <Property Name="TypeConst" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="TypeText" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Arkivalie">
+          <Key>
+            <PropertyRef Name="ArkivalieID" />
+            <PropertyRef Name="Klausul" />
+          </Key>
+          <Property Name="ArkivalieID" Type="Int32" Nullable="false" />
+          <Property Name="Journal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Arkivfondnr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Art" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KasseNr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Signatur" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Klausul" Type="Boolean" Nullable="false" />
+          <Property Name="YderAarStart" Type="Double" />
+          <Property Name="YderAarSlut" Type="Double" />
+          <Property Name="Omfang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="AntKort" Type="Double" />
+          <Property Name="Indlevering" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ArkivFond">
+          <Key>
+            <PropertyRef Name="ArkivfondID" />
+          </Key>
+          <Property Name="ArkivfondID" Type="Int32" Nullable="false" />
+          <Property Name="ArkivNr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ArkivNavn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ArkivDef" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ArkivType" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="StiftetDay" Type="Double" />
+          <Property Name="StiftetMonth" Type="Double" />
+          <Property Name="StiftetYear" Type="Double" />
+          <Property Name="AfsluttetDay" Type="Double" />
+          <Property Name="AfsluttetMonth" Type="Double" />
+          <Property Name="AfsluttetYear" Type="Double" />
+          <Property Name="Adresse" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Postnr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Aviser">
+          <Key>
+            <PropertyRef Name="AvisID" />
+          </Key>
+          <Property Name="AvisID" Type="Int32" Nullable="false" />
+          <Property Name="Aviskode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Avisnavn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Bibliotek">
+          <Key>
+            <PropertyRef Name="BogID" />
+          </Key>
+          <Property Name="BogID" Type="Int32" Nullable="false" />
+          <Property Name="Bogkode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Journal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DK5" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Ordningsord" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Titel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Undertitel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Redaktor" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Forfatter" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Udgivet" Type="Double" />
+          <Property Name="Forlag" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Samlemappe" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Indlevering" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Billeder">
+          <Key>
+            <PropertyRef Name="BilledID" />
+            <PropertyRef Name="Ophavsret" />
+            <PropertyRef Name="Klausul" />
+          </Key>
+          <Property Name="BilledID" Type="Int32" Nullable="false" />
+          <Property Name="Journal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Billedindex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Numordning" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Ordning" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CDnr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fotograf" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Format" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Materiale" Type="Double" />
+          <Property Name="Placering" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ophavsret" Type="Boolean" Nullable="false" />
+          <Property Name="Klausul" Type="Boolean" Nullable="false" />
+          <Property Name="Datering" Type="DateTime" Precision="3" />
+          <Property Name="Indlevering" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EventKoder">
+          <Key>
+            <PropertyRef Name="EventkodeID" />
+          </Key>
+          <Property Name="EventkodeID" Type="Int32" Nullable="false" />
+          <Property Name="Eventkode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <Property Name="PersonID" Type="Double" />
+          <Property Name="Ind_Dag" Type="Double" />
+          <Property Name="Ind_Mrd" Type="Double" />
+          <Property Name="Ind_Aar" Type="Double" />
+          <Property Name="Eventkode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="InstKode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Tekstfelt1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tekstfelt2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tekstfelt3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tekstfelt4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tekstfelt5" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tekstfelt6" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tekstfelt7" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tekstfelt8" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tekstfelt9" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Tekstfelt10" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Giver">
+          <Key>
+            <PropertyRef Name="GiverID" />
+          </Key>
+          <Property Name="GiverID" Type="Int32" Nullable="false" />
+          <Property Name="Journal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Navn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Att" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Adresse" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Postnr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AflevDato" Type="DateTime" Precision="3" />
+          <Property Name="Registrator" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="institution">
+          <Key>
+            <PropertyRef Name="InstID" />
+          </Key>
+          <Property Name="InstID" Type="Int32" Nullable="false" />
+          <Property Name="InstKode" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="Navn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Gade" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Nr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Sted" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Postnr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Stiftet" Type="DateTime" Precision="3" />
+          <Property Name="Afsluttet" Type="DateTime" Precision="3" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Journaler">
+          <Key>
+            <PropertyRef Name="JournalKey" />
+          </Key>
+          <Property Name="JournalKey" Type="Int32" Nullable="false" />
+          <Property Name="JournalID" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Afleveret" Type="DateTime" Precision="3" />
+          <Property Name="MedieArt" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Antal" Type="Double" />
+          <Property Name="Regs" Type="Double" />
+          <Property Name="Note" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Kirkebog">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="Fornavn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Efternavn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Ind_dato" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Kirkehandling" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Kopi_af_ArkivFond">
+          <Key>
+            <PropertyRef Name="ArkivfondID" />
+          </Key>
+          <Property Name="ArkivfondID" Type="Int32" Nullable="false" />
+          <Property Name="ArkivNr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ArkivNavn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ArkivDef" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ArkivType" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="StiftetDay" Type="Double" />
+          <Property Name="StiftetMonth" Type="Double" />
+          <Property Name="StiftetYear" Type="Double" />
+          <Property Name="AfsluttetDay" Type="Double" />
+          <Property Name="AfsluttetMonth" Type="Double" />
+          <Property Name="AfsluttetYear" Type="Double" />
+          <Property Name="Adresse" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Postnr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="By" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Kort">
+          <Key>
+            <PropertyRef Name="KortID" />
+          </Key>
+          <Property Name="KortID" Type="Int32" Nullable="false" />
+          <Property Name="Kortnr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Journal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Navn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="KortType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Propertion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Udgiver" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateringAar" Type="Int32" />
+          <Property Name="RevAar" Type="Int32" />
+          <Property Name="Omraade" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Depot" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Format" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Materiale" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Indlevering" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="MatrikelSted">
+          <Key>
+            <PropertyRef Name="MatrikelID" />
+          </Key>
+          <Property Name="MatrikelID" Type="Int32" Nullable="false" />
+          <Property Name="MatSted" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StedNavn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Matrikler">
+          <Key>
+            <PropertyRef Name="MatrikelID" />
+          </Key>
+          <Property Name="MatrikelID" Type="Int32" Nullable="false" />
+          <Property Name="MatrikelNr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Kilde" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Oprettet" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Dato" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Stamnr" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Ejer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Bruger" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Vejnavn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Vejnr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Sted" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Postnr" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="By" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Personer">
+          <Key>
+            <PropertyRef Name="PersonID" />
+          </Key>
+          <Property Name="PersonID" Type="Int32" Nullable="false" />
+          <Property Name="Fornavn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Mellemnavn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Pigenavn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Efternavn" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Ind_Dag" Type="Double" />
+          <Property Name="Ind_Mrd" Type="Double" />
+          <Property Name="Ind_Aar" Type="Double" />
+          <Property Name="Adresse_Vej" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Adresse_nr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Adresse_Sted" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Adresse_Postnr" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Adresse_PostBy" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sekvenser">
+          <Key>
+            <PropertyRef Name="SekvensID" />
+            <PropertyRef Name="Klausul" />
+          </Key>
+          <Property Name="SekvensID" Type="Int32" Nullable="false" />
+          <Property Name="SekvensNr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Journal" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Titel" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateringDag" Type="Double" />
+          <Property Name="DateringMrd" Type="Double" />
+          <Property Name="DateringAar" Type="Double" />
+          <Property Name="Kilde" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Interviewer" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Klausul" Type="Boolean" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Indlevering" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="udklip">
+          <Key>
+            <PropertyRef Name="UdklipsID" />
+          </Key>
+          <Property Name="UdklipsID" Type="Int32" Nullable="false" />
+          <Property Name="Mappe" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Overskrift" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Datering" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Aviskode" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="UserTbl">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Initials" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserPwd" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Accesslevel" Type="Double" />
+        </EntityType>
+        <EntityContainer Name="ILABClassic" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ArkfondTypes" EntityType="Self.ArkfondTypes" />
+          <EntitySet Name="Arkivalie" EntityType="Self.Arkivalie" />
+          <EntitySet Name="ArkivFond" EntityType="Self.ArkivFond" />
+          <EntitySet Name="Aviser" EntityType="Self.Aviser" />
+          <EntitySet Name="Bibliotek" EntityType="Self.Bibliotek" />
+          <EntitySet Name="Billeder" EntityType="Self.Billeder" />
+          <EntitySet Name="EventKoder" EntityType="Self.EventKoder" />
+          <EntitySet Name="Events" EntityType="Self.Events" />
+          <EntitySet Name="Giver" EntityType="Self.Giver" />
+          <EntitySet Name="institution" EntityType="Self.institution" />
+          <EntitySet Name="Journaler" EntityType="Self.Journaler" />
+          <EntitySet Name="Kirkebog" EntityType="Self.Kirkebog" />
+          <EntitySet Name="Kopi_af_ArkivFond" EntityType="Self.Kopi_af_ArkivFond" />
+          <EntitySet Name="Kort" EntityType="Self.Kort" />
+          <EntitySet Name="MatrikelSted" EntityType="Self.MatrikelSted" />
+          <EntitySet Name="Matrikler" EntityType="Self.Matrikler" />
+          <EntitySet Name="Personer" EntityType="Self.Personer" />
+          <EntitySet Name="Sekvenser" EntityType="Self.Sekvenser" />
+          <EntitySet Name="udklip" EntityType="Self.udklip" />
+          <EntitySet Name="UserTbl" EntityType="Self.UserTbl" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ILABModelStoreContainer" CdmEntityContainer="ILABClassic">
+          <EntitySetMapping Name="ArkfondTypes">
+            <EntityTypeMapping TypeName="ILABModel.ArkfondTypes">
+              <MappingFragment StoreEntitySet="ArkfondTypes">
+                <ScalarProperty Name="TypeKey" ColumnName="TypeKey" />
+                <ScalarProperty Name="TypeConst" ColumnName="TypeConst" />
+                <ScalarProperty Name="TypeText" ColumnName="TypeText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Arkivalie">
+            <EntityTypeMapping TypeName="ILABModel.Arkivalie">
+              <MappingFragment StoreEntitySet="Arkivalie">
+                <ScalarProperty Name="ArkivalieID" ColumnName="ArkivalieID" />
+                <ScalarProperty Name="Journal" ColumnName="Journal" />
+                <ScalarProperty Name="Arkivfondnr" ColumnName="Arkivfondnr" />
+                <ScalarProperty Name="Art" ColumnName="Art" />
+                <ScalarProperty Name="KasseNr" ColumnName="KasseNr" />
+                <ScalarProperty Name="Signatur" ColumnName="Signatur" />
+                <ScalarProperty Name="Klausul" ColumnName="Klausul" />
+                <ScalarProperty Name="YderAarStart" ColumnName="YderAarStart" />
+                <ScalarProperty Name="YderAarSlut" ColumnName="YderAarSlut" />
+                <ScalarProperty Name="Omfang" ColumnName="Omfang" />
+                <ScalarProperty Name="AntKort" ColumnName="AntKort" />
+                <ScalarProperty Name="Indlevering" ColumnName="Indlevering" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArkivFond">
+            <EntityTypeMapping TypeName="ILABModel.ArkivFond">
+              <MappingFragment StoreEntitySet="ArkivFond">
+                <ScalarProperty Name="ArkivfondID" ColumnName="ArkivfondID" />
+                <ScalarProperty Name="ArkivNr" ColumnName="ArkivNr" />
+                <ScalarProperty Name="ArkivNavn" ColumnName="ArkivNavn" />
+                <ScalarProperty Name="ArkivDef" ColumnName="ArkivDef" />
+                <ScalarProperty Name="ArkivType" ColumnName="ArkivType" />
+                <ScalarProperty Name="StiftetDay" ColumnName="StiftetDay" />
+                <ScalarProperty Name="StiftetMonth" ColumnName="StiftetMonth" />
+                <ScalarProperty Name="StiftetYear" ColumnName="StiftetYear" />
+                <ScalarProperty Name="AfsluttetDay" ColumnName="AfsluttetDay" />
+                <ScalarProperty Name="AfsluttetMonth" ColumnName="AfsluttetMonth" />
+                <ScalarProperty Name="AfsluttetYear" ColumnName="AfsluttetYear" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="Postnr" ColumnName="Postnr" />
+                <ScalarProperty Name="By" ColumnName="By" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Aviser">
+            <EntityTypeMapping TypeName="ILABModel.Aviser">
+              <MappingFragment StoreEntitySet="Aviser">
+                <ScalarProperty Name="AvisID" ColumnName="AvisID" />
+                <ScalarProperty Name="Aviskode" ColumnName="Aviskode" />
+                <ScalarProperty Name="Avisnavn" ColumnName="Avisnavn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bibliotek">
+            <EntityTypeMapping TypeName="ILABModel.Bibliotek">
+              <MappingFragment StoreEntitySet="Bibliotek">
+                <ScalarProperty Name="BogID" ColumnName="BogID" />
+                <ScalarProperty Name="Bogkode" ColumnName="Bogkode" />
+                <ScalarProperty Name="Journal" ColumnName="Journal" />
+                <ScalarProperty Name="DK5" ColumnName="DK5" />
+                <ScalarProperty Name="Ordningsord" ColumnName="Ordningsord" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="Undertitel" ColumnName="Undertitel" />
+                <ScalarProperty Name="Redaktor" ColumnName="Redaktor" />
+                <ScalarProperty Name="Forfatter" ColumnName="Forfatter" />
+                <ScalarProperty Name="Udgivet" ColumnName="Udgivet" />
+                <ScalarProperty Name="Forlag" ColumnName="Forlag" />
+                <ScalarProperty Name="Samlemappe" ColumnName="Samlemappe" />
+                <ScalarProperty Name="Indlevering" ColumnName="Indlevering" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Billeder">
+            <EntityTypeMapping TypeName="ILABModel.Billeder">
+              <MappingFragment StoreEntitySet="Billeder">
+                <ScalarProperty Name="BilledID" ColumnName="BilledID" />
+                <ScalarProperty Name="Journal" ColumnName="Journal" />
+                <ScalarProperty Name="Billedindex" ColumnName="Billedindex" />
+                <ScalarProperty Name="Numordning" ColumnName="Numordning" />
+                <ScalarProperty Name="Ordning" ColumnName="Ordning" />
+                <ScalarProperty Name="CDnr" ColumnName="CDnr" />
+                <ScalarProperty Name="Fotograf" ColumnName="Fotograf" />
+                <ScalarProperty Name="Format" ColumnName="Format" />
+                <ScalarProperty Name="Materiale" ColumnName="Materiale" />
+                <ScalarProperty Name="Placering" ColumnName="Placering" />
+                <ScalarProperty Name="Ophavsret" ColumnName="Ophavsret" />
+                <ScalarProperty Name="Klausul" ColumnName="Klausul" />
+                <ScalarProperty Name="Datering" ColumnName="Datering" />
+                <ScalarProperty Name="Indlevering" ColumnName="Indlevering" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventKoder">
+            <EntityTypeMapping TypeName="ILABModel.EventKoder">
+              <MappingFragment StoreEntitySet="EventKoder">
+                <ScalarProperty Name="EventkodeID" ColumnName="EventkodeID" />
+                <ScalarProperty Name="Eventkode" ColumnName="Eventkode" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="ILABModel.Events">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="Ind_Dag" ColumnName="Ind_Dag" />
+                <ScalarProperty Name="Ind_Mrd" ColumnName="Ind_Mrd" />
+                <ScalarProperty Name="Ind_Aar" ColumnName="Ind_Aar" />
+                <ScalarProperty Name="Eventkode" ColumnName="Eventkode" />
+                <ScalarProperty Name="InstKode" ColumnName="InstKode" />
+                <ScalarProperty Name="Tekstfelt1" ColumnName="Tekstfelt1" />
+                <ScalarProperty Name="Tekstfelt2" ColumnName="Tekstfelt2" />
+                <ScalarProperty Name="Tekstfelt3" ColumnName="Tekstfelt3" />
+                <ScalarProperty Name="Tekstfelt4" ColumnName="Tekstfelt4" />
+                <ScalarProperty Name="Tekstfelt5" ColumnName="Tekstfelt5" />
+                <ScalarProperty Name="Tekstfelt6" ColumnName="Tekstfelt6" />
+                <ScalarProperty Name="Tekstfelt7" ColumnName="Tekstfelt7" />
+                <ScalarProperty Name="Tekstfelt8" ColumnName="Tekstfelt8" />
+                <ScalarProperty Name="Tekstfelt9" ColumnName="Tekstfelt9" />
+                <ScalarProperty Name="Tekstfelt10" ColumnName="Tekstfelt10" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Giver">
+            <EntityTypeMapping TypeName="ILABModel.Giver">
+              <MappingFragment StoreEntitySet="Giver">
+                <ScalarProperty Name="GiverID" ColumnName="GiverID" />
+                <ScalarProperty Name="Journal" ColumnName="Journal" />
+                <ScalarProperty Name="Navn" ColumnName="Navn" />
+                <ScalarProperty Name="Att" ColumnName="Att" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="Postnr" ColumnName="Postnr" />
+                <ScalarProperty Name="By" ColumnName="By" />
+                <ScalarProperty Name="AflevDato" ColumnName="AflevDato" />
+                <ScalarProperty Name="Registrator" ColumnName="Registrator" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="institution">
+            <EntityTypeMapping TypeName="ILABModel.institution">
+              <MappingFragment StoreEntitySet="institution">
+                <ScalarProperty Name="InstID" ColumnName="InstID" />
+                <ScalarProperty Name="InstKode" ColumnName="InstKode" />
+                <ScalarProperty Name="Navn" ColumnName="Navn" />
+                <ScalarProperty Name="Gade" ColumnName="Gade" />
+                <ScalarProperty Name="Nr" ColumnName="Nr" />
+                <ScalarProperty Name="Sted" ColumnName="Sted" />
+                <ScalarProperty Name="Postnr" ColumnName="Postnr" />
+                <ScalarProperty Name="Stiftet" ColumnName="Stiftet" />
+                <ScalarProperty Name="Afsluttet" ColumnName="Afsluttet" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Journaler">
+            <EntityTypeMapping TypeName="ILABModel.Journaler">
+              <MappingFragment StoreEntitySet="Journaler">
+                <ScalarProperty Name="JournalKey" ColumnName="JournalKey" />
+                <ScalarProperty Name="JournalID" ColumnName="JournalID" />
+                <ScalarProperty Name="Afleveret" ColumnName="Afleveret" />
+                <ScalarProperty Name="MedieArt" ColumnName="MedieArt" />
+                <ScalarProperty Name="Antal" ColumnName="Antal" />
+                <ScalarProperty Name="Regs" ColumnName="Regs" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kirkebog">
+            <EntityTypeMapping TypeName="ILABModel.Kirkebog">
+              <MappingFragment StoreEntitySet="Kirkebog">
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="Fornavn" ColumnName="Fornavn" />
+                <ScalarProperty Name="Efternavn" ColumnName="Efternavn" />
+                <ScalarProperty Name="Ind_dato" ColumnName="Ind_dato" />
+                <ScalarProperty Name="Kirkehandling" ColumnName="Kirkehandling" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kopi_af_ArkivFond">
+            <EntityTypeMapping TypeName="ILABModel.Kopi_af_ArkivFond">
+              <MappingFragment StoreEntitySet="Kopi af ArkivFond">
+                <ScalarProperty Name="ArkivfondID" ColumnName="ArkivfondID" />
+                <ScalarProperty Name="ArkivNr" ColumnName="ArkivNr" />
+                <ScalarProperty Name="ArkivNavn" ColumnName="ArkivNavn" />
+                <ScalarProperty Name="ArkivDef" ColumnName="ArkivDef" />
+                <ScalarProperty Name="ArkivType" ColumnName="ArkivType" />
+                <ScalarProperty Name="StiftetDay" ColumnName="StiftetDay" />
+                <ScalarProperty Name="StiftetMonth" ColumnName="StiftetMonth" />
+                <ScalarProperty Name="StiftetYear" ColumnName="StiftetYear" />
+                <ScalarProperty Name="AfsluttetDay" ColumnName="AfsluttetDay" />
+                <ScalarProperty Name="AfsluttetMonth" ColumnName="AfsluttetMonth" />
+                <ScalarProperty Name="AfsluttetYear" ColumnName="AfsluttetYear" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="Postnr" ColumnName="Postnr" />
+                <ScalarProperty Name="By" ColumnName="By" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kort">
+            <EntityTypeMapping TypeName="ILABModel.Kort">
+              <MappingFragment StoreEntitySet="Kort">
+                <ScalarProperty Name="KortID" ColumnName="KortID" />
+                <ScalarProperty Name="Kortnr" ColumnName="Kortnr" />
+                <ScalarProperty Name="Journal" ColumnName="Journal" />
+                <ScalarProperty Name="Navn" ColumnName="Navn" />
+                <ScalarProperty Name="KortType" ColumnName="KortType" />
+                <ScalarProperty Name="Propertion" ColumnName="Propertion" />
+                <ScalarProperty Name="Udgiver" ColumnName="Udgiver" />
+                <ScalarProperty Name="DateringAar" ColumnName="DateringAar" />
+                <ScalarProperty Name="RevAar" ColumnName="RevAar" />
+                <ScalarProperty Name="Omraade" ColumnName="Omraade" />
+                <ScalarProperty Name="Depot" ColumnName="Depot" />
+                <ScalarProperty Name="Format" ColumnName="Format" />
+                <ScalarProperty Name="Materiale" ColumnName="Materiale" />
+                <ScalarProperty Name="Indlevering" ColumnName="Indlevering" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MatrikelSted">
+            <EntityTypeMapping TypeName="ILABModel.MatrikelSted">
+              <MappingFragment StoreEntitySet="MatrikelSted">
+                <ScalarProperty Name="MatrikelID" ColumnName="MatrikelID" />
+                <ScalarProperty Name="MatSted" ColumnName="MatSted" />
+                <ScalarProperty Name="StedNavn" ColumnName="StedNavn" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matrikler">
+            <EntityTypeMapping TypeName="ILABModel.Matrikler">
+              <MappingFragment StoreEntitySet="Matrikler">
+                <ScalarProperty Name="MatrikelID" ColumnName="MatrikelID" />
+                <ScalarProperty Name="MatrikelNr" ColumnName="MatrikelNr" />
+                <ScalarProperty Name="Kilde" ColumnName="Kilde" />
+                <ScalarProperty Name="Oprettet" ColumnName="Oprettet" />
+                <ScalarProperty Name="Dato" ColumnName="Dato" />
+                <ScalarProperty Name="Stamnr" ColumnName="Stamnr" />
+                <ScalarProperty Name="Ejer" ColumnName="Ejer" />
+                <ScalarProperty Name="Bruger" ColumnName="Bruger" />
+                <ScalarProperty Name="Vejnavn" ColumnName="Vejnavn" />
+                <ScalarProperty Name="Vejnr" ColumnName="Vejnr" />
+                <ScalarProperty Name="Sted" ColumnName="Sted" />
+                <ScalarProperty Name="Postnr" ColumnName="Postnr" />
+                <ScalarProperty Name="By" ColumnName="By" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personer">
+            <EntityTypeMapping TypeName="ILABModel.Personer">
+              <MappingFragment StoreEntitySet="Personer">
+                <ScalarProperty Name="PersonID" ColumnName="PersonID" />
+                <ScalarProperty Name="Fornavn" ColumnName="Fornavn" />
+                <ScalarProperty Name="Mellemnavn" ColumnName="Mellemnavn" />
+                <ScalarProperty Name="Pigenavn" ColumnName="Pigenavn" />
+                <ScalarProperty Name="Efternavn" ColumnName="Efternavn" />
+                <ScalarProperty Name="Ind_Dag" ColumnName="Ind_Dag" />
+                <ScalarProperty Name="Ind_Mrd" ColumnName="Ind_Mrd" />
+                <ScalarProperty Name="Ind_Aar" ColumnName="Ind_Aar" />
+                <ScalarProperty Name="Adresse_Vej" ColumnName="Adresse_Vej" />
+                <ScalarProperty Name="Adresse_nr" ColumnName="Adresse_nr" />
+                <ScalarProperty Name="Adresse_Sted" ColumnName="Adresse_Sted" />
+                <ScalarProperty Name="Adresse_Postnr" ColumnName="Adresse_Postnr" />
+                <ScalarProperty Name="Adresse_PostBy" ColumnName="Adresse_PostBy" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sekvenser">
+            <EntityTypeMapping TypeName="ILABModel.Sekvenser">
+              <MappingFragment StoreEntitySet="Sekvenser">
+                <ScalarProperty Name="SekvensID" ColumnName="SekvensID" />
+                <ScalarProperty Name="SekvensNr" ColumnName="SekvensNr" />
+                <ScalarProperty Name="Journal" ColumnName="Journal" />
+                <ScalarProperty Name="Titel" ColumnName="Titel" />
+                <ScalarProperty Name="DateringDag" ColumnName="DateringDag" />
+                <ScalarProperty Name="DateringMrd" ColumnName="DateringMrd" />
+                <ScalarProperty Name="DateringAar" ColumnName="DateringAar" />
+                <ScalarProperty Name="Kilde" ColumnName="Kilde" />
+                <ScalarProperty Name="Interviewer" ColumnName="Interviewer" />
+                <ScalarProperty Name="Klausul" ColumnName="Klausul" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Indlevering" ColumnName="Indlevering" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="udklip">
+            <EntityTypeMapping TypeName="ILABModel.udklip">
+              <MappingFragment StoreEntitySet="udklip">
+                <ScalarProperty Name="UdklipsID" ColumnName="UdklipsID" />
+                <ScalarProperty Name="Mappe" ColumnName="Mappe" />
+                <ScalarProperty Name="Overskrift" ColumnName="Overskrift" />
+                <ScalarProperty Name="Datering" ColumnName="Datering" />
+                <ScalarProperty Name="Aviskode" ColumnName="Aviskode" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTbl">
+            <EntityTypeMapping TypeName="ILABModel.UserTbl">
+              <MappingFragment StoreEntitySet="UserTbl">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Initials" ColumnName="Initials" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="UserPwd" ColumnName="UserPwd" />
+                <ScalarProperty Name="Accesslevel" ColumnName="Accesslevel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

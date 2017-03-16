@@ -37,6 +37,9 @@ namespace Munin.DAL.Models
         //Klausul
         public bool Provision { get; set; }
 
+        //Placering
+        public string Placed { get; set; }
+
         public DateTime DateTime { get; set; }
         public string Comment { get; set; }
     }

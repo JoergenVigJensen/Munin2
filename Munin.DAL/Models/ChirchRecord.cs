@@ -4,7 +4,7 @@ namespace Munin.DAL.Models
 {
     public class ChirchRecord
     {
-        public int ChirchRecorddId { get; set; }
+        public int ChirchRecordId { get; set; }
 
         public string FirstName { get; set; }
 

@@ -17,8 +17,9 @@ namespace Munin.DAL.Models
         public string Definition { get; set; }
         public ArchiveType ArchiveType { get; set; }
 
-        public DateTime Established { get; set; }
-
+        public Nullable<DateTime> Established { get; set; }
+        public Nullable<DateTime> ClosedDate { get; set; }
+       
         public string Comment { get; set; }
 
     }

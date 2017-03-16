@@ -55,7 +55,9 @@ namespace Munin.DAL
         [Description("Ugeskrift for Læger")]
         UgeskriftForLaeger = 13,
         [Description("MorgenPosten")]
-        MorgenPosten = 14
+        MorgenPosten = 14,
+        [Description("Fyens Amtsavis")]
+        FyensAmtsAvis = 15,
     }
 
     public enum ChirchEvent

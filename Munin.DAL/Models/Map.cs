@@ -25,6 +25,8 @@
 
         public MapMaterial Material { get; set; }
 
+        public string Depot { get; set; }
+
         public string Comment { get; set; }
 
     }

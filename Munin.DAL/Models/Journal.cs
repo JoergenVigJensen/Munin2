@@ -22,7 +22,9 @@ namespace Munin.DAL.Models
 
         public int Regs { get; set; }
 
-        public virtual Provider Provider { get; set; }
+        public string Comment { get; set; }
+
+        //public virtual Provider Provider { get; set; }
 
         public ICollection<Picture> PirPictures = new HashSet<Picture>();
 
