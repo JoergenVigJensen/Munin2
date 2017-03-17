@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Munin.DAL.Models.Picture>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PictureIndex)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderNum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CDNb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photograph)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PictureMaterial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Copyright)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Provision)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Placed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PictureIndex)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OrderNum)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tag)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CDNb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Photograph)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Size)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PictureMaterial)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Copyright)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Provision)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Placed)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PictureId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PictureId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PictureId })
+        </td>
+    </tr>
+}
+
+</table>

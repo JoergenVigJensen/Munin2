@@ -1,0 +1,58 @@
+﻿@model Munin.DAL.Models.Clip
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Clip</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Attache)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Attache)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Paper)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Paper)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ClipId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

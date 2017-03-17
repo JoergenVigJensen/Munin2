@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Munin.DAL.Models
 {
@@ -9,10 +10,12 @@ namespace Munin.DAL.Models
     public class Picture
     {
         public int PictureId { get; set; }
-
+        [Required]
         public Journal Journal { get; set; }
 
         //BilledIndex
+        [Required(ErrorMessage = "Der skal angives billedindex")]
+        [RegularExpression(@"^(?i)B.\d{4}$", ErrorMessage = "Billedindex skal opfylde formatet B.1234")]
         public string PictureIndex { get; set; }
 
         //Numordning
@@ -29,6 +32,7 @@ namespace Munin.DAL.Models
         //Format
         public string Size { get; set; }
 
+        [Required(ErrorMessage = "Der skal vælges materiale til billede.")]
         public PictureMaterial PictureMaterial { get; set; }
 
         //Ophavsret

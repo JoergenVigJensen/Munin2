@@ -11,7 +11,8 @@ namespace DBMigration
     class Program
     {
 
-        private static StreamWriter writer = File.AppendText("Logfil.txt");
+
+        private static StreamWriter writer;
 
         private static string ArchiveGUID;
         private static string ArchiveDocGUID;
@@ -439,8 +440,13 @@ namespace DBMigration
                             Tag = item.Ordningsord
                         };
 
+                        string bogkode = item.Bogkode;
+
+                        if (string.IsNullOrEmpty(bogkode))
+                            continue;
+                        
                         if (book.PublishYear == 0)
-                            message += string.Format("Bog: {0} mangler udgivelsesår", item.Bogkode);
+                            message += string.Format("Bog: {0} mangler udgivelsesår", bogkode);
 
                         muninDb.Books.Add(book);
                         muninDb.SaveChanges();
@@ -634,9 +640,14 @@ namespace DBMigration
             if (journal != null)
                 return journal;
 
+            int year = DateTime.Today.Year;
+
+            if (journalnr != null)
+                year = Int32.Parse(journalnr.Split('/')[0]);
+
             journal = new Journal()
             {
-                JournalNb = journalnr
+                JournalNb = journalnr                
             };
 
             if (typeof(T).GUID.ToString() == BookGUID)
@@ -648,7 +659,7 @@ namespace DBMigration
             if (typeof(T).GUID.ToString() == SeqGUID)
                 journal.Material = Material.Sequence;
 
-            journal.ReceiveDate = DateTime.Now;
+            journal.ReceiveDate = new DateTime(year, 1, 1);
             journal.Count = 1;
             journal.Regs = 1;
 

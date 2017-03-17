@@ -1,0 +1,74 @@
+﻿@model Munin.DAL.Models.ArchiveDocument
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ArchiveDocument</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BoxNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BoxNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Signature)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Signature)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Copyright)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Copyright)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YearStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YearStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.YearEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YearEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cover)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cover)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ArchiveDocumentId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

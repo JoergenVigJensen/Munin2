@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Munin.DAL.Models.Journal>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.JournalNb)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReceiveDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Material)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Count)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Regs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.JournalNb)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReceiveDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Material)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Count)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Regs)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.JournalId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.JournalId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.JournalId })
+        </td>
+    </tr>
+}
+
+</table>

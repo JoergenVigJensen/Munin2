@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Munin.DAL.Models.ArchiveDocument>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BoxNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Signature)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Copyright)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YearStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.YearEnd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cover)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BoxNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Signature)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Copyright)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YearStart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.YearEnd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cover)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ArchiveDocumentId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ArchiveDocumentId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ArchiveDocumentId })
+        </td>
+    </tr>
+}
+
+</table>

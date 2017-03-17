@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ILABDb.DAL", "ILABDb.DAL\IL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBMigration", "DBMigration\DBMigration.csproj", "{FC2C2ECE-1240-4692-B450-09B42FD795C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Munin.Web", "Munin.Web\Munin.Web.csproj", "{C189820C-0CD7-4077-ACE8-497D62240E1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{FC2C2ECE-1240-4692-B450-09B42FD795C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC2C2ECE-1240-4692-B450-09B42FD795C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC2C2ECE-1240-4692-B450-09B42FD795C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C189820C-0CD7-4077-ACE8-497D62240E1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C189820C-0CD7-4077-ACE8-497D62240E1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C189820C-0CD7-4077-ACE8-497D62240E1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C189820C-0CD7-4077-ACE8-497D62240E1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

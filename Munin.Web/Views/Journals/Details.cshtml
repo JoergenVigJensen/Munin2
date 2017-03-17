@@ -1,0 +1,66 @@
+﻿@model Munin.DAL.Models.Journal
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Journal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.JournalNb)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.JournalNb)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceiveDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceiveDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Material)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Material)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Count)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Regs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Regs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Comment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Comment)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.JournalId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
