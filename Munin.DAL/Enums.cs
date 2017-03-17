@@ -208,6 +208,7 @@ namespace Munin.DAL
     public enum ArchiveType
     {
         Andet,
+        A,
         P,
         I,
         E,

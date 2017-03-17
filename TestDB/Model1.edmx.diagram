@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="44325b539a6c4835832cac5a3a7f712e" Name="Diagram1">
+        <EntityTypeShape EntityType="MuninDbModel.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MuninDbModel.Archives" Width="1.5" PointX="5.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MuninDbModel.Books" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MuninDbModel.Cadasters" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MuninDbModel.ChirchRecords" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MuninDbModel.Clips" Width="1.5" PointX="5.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MuninDbModel.Journals" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="MuninDbModel.Maps" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MuninDbModel.Pictures" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MuninDbModel.Providers" Width="1.5" PointX="3" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MuninDbModel.Sequences" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
+        <AssociationConnector Association="MuninDbModel.FK_dbo_Books_dbo_Journals_Journal_JournalId" ManuallyRouted="false" />
+        <AssociationConnector Association="MuninDbModel.FK_dbo_Maps_dbo_Journals_Journal_JournalId" ManuallyRouted="false" />
+        <AssociationConnector Association="MuninDbModel.FK_dbo_Pictures_dbo_Journals_Journal_JournalId" ManuallyRouted="false" />
+        <AssociationConnector Association="MuninDbModel.FK_dbo_Providers_dbo_Journals_Journal_JournalId" ManuallyRouted="false" />
+        <AssociationConnector Association="MuninDbModel.FK_dbo_Sequences_dbo_Journals_Journal_JournalId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

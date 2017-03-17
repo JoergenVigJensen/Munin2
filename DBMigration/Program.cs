@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Migrations.Utilities;
-using System.Data.SqlTypes;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Runtime.Remoting.Channels;
-using System.Runtime.Remoting.Messaging;
-using System.Security.Permissions;
 using Munin.DAL;
 using Munin.DAL.Models;
 using ILABDb.DAL;
@@ -36,6 +25,8 @@ namespace DBMigration
         private static string ProviderGUID;
         private static string SeqGUID;
 
+        private static DateTime SQLSrvMinDate = new DateTime(1799,1,1);
+
         static void Main(string[] args)
         {
             bool running = false;
@@ -47,10 +38,6 @@ namespace DBMigration
             ArchiveDocument adoc = new ArchiveDocument();
 
             var t = ar.GetType();
-
-            var s = Console.ReadLine();
-
-            running = CreateProviders();
 
             ArchiveGUID = typeof(Archive).GUID.ToString();
             ArchiveDocGUID = typeof(ArchiveDocument).GUID.ToString();
@@ -64,38 +51,59 @@ namespace DBMigration
             ProviderGUID = typeof(Provider).GUID.ToString();
             SeqGUID = typeof(Sequence).GUID.ToString();
 
-            if (running)
-                running = CreateJournals();
+            Console.WriteLine("Starter kørsel");
 
+            Console.WriteLine("Starter Journaler");
+            CreateJournals();
+
+            Console.WriteLine("Starter Giver");
+            CreateProviders();
+
+            Console.WriteLine("Starter Arkivfonde");
             CreateArchives();
 
+            Console.WriteLine("Starter Arkivalier ");
             CreateArhiveDocs();
 
+            Console.WriteLine("Starter Kort");
             CreateArhiveMaps();
 
+            Console.WriteLine("Starter Bøger");
             CreateArhiveBooks();
 
+            Console.WriteLine("Starter Matrikler");
             CreateCadaster();
 
+            Console.WriteLine("Starter Udklip");
             CreateClips();
 
+            Console.WriteLine("Starter Billeder");
             CreatePicture();
 
+            Console.WriteLine("Starter Sekvenser");
             CreateSequence();
+
+            Console.ReadLine();
         }
 
         private static void CreateSequence()
         {
             var muninDb = new MuninDb();
+            int i = 1;
+
             using (var db = new ILABClassic())
             {
                 foreach (var item in db.Sekvenser.ToList())
                 {
                     string message = "";
 
+                    Console.Write("\r sekvens {0}   ", i);
+                    i++;
+
+
                     try
                     {
-                        var journal = GetJournal<Map>(item.Journal, muninDb);
+                        var journal = GetJournal<Sequence>(item.Journal, muninDb);
                         var seq = new Sequence()
                         {
                             SequenceNb = item.SekvensNr,
@@ -113,7 +121,10 @@ namespace DBMigration
                         DateTime dt = mergeDatetime(item.DateringAar, item.DateringMrd, item.DateringDag);
 
                         if (dt == DateTime.MinValue)
+                        {
                             message += string.Format("Sekvens {0} har ikke angivet dato", item.SekvensNr);
+                            dt = SQLSrvMinDate;
+                        }
 
                         seq.DateTime = dt;
 
@@ -133,6 +144,10 @@ namespace DBMigration
 
         private static SequenceType GetSeqType(string sekvenstype)
         {
+
+            if (string.IsNullOrEmpty(sekvenstype))
+                return SequenceType.Andet;
+
             if (sekvenstype.ToUpper().IndexOf("SUPER") > 0) return SequenceType.Superfilm8mm;
 
             if (sekvenstype.ToUpper().IndexOf("FARVE") > 0) return SequenceType.Filmfarve8mm;
@@ -173,30 +188,43 @@ namespace DBMigration
         private static void CreatePicture()
         {
             var muninDb = new MuninDb();
+            int i = 1;
             using (var db = new ILABClassic())
             {
                 foreach (var item in db.Billeder.ToList())
                 {
                     string message = "";
-
+                    Console.Write("\r billede {0}   ", i);
+                    i++;
                     try
                     {
                         var journal = GetJournal<Picture>(item.Journal, muninDb);
                         var pic = new Picture()
                         {
                             PictureIndex = item.Billedindex,
-                            CDNb = item.CDnr,
-                            Copyright = item.Ophavsret,
+                            CDNb =   (string.IsNullOrEmpty(item.CDnr))? "" : item.CDnr,
+                            Copyright =  item.Ophavsret,
                             Journal = journal,
-                            Photograph = item.Fotograf,
+                            Photograph = (string.IsNullOrEmpty(item.Fotograf)) ? "" : item.Fotograf,
                             OrderNum = item.Numordning,
                             Provision = item.Klausul,
                             Size = item.Format,
-                            Tag = item.Ordning,
-                            Placed = item.Placering,                                                        
+                            Tag = (string.IsNullOrEmpty(item.Ordning)) ? "" : item.Ordning,
+                            Placed = item.Placering,                                                                                    
                             Comment = item.Note                            
                         };
                         pic.PictureMaterial = (PictureMaterial) ((item.Materiale == null) ? 6 : (int) item.Materiale.Value);
+
+                        DateTime dt = SQLSrvMinDate;
+                        if (item.Datering != null)
+                            dt = item.Datering.Value;
+                        else
+                        {
+                            message += string.Format("\n\r Kort {0} har ikke korrekt datering", item.Billedindex);
+                        }
+
+                        pic.DateTime = dt;
+
 
                         muninDb.Pictures.Add(pic);
                         muninDb.SaveChanges();
@@ -214,12 +242,16 @@ namespace DBMigration
 
         private static void CreateClips()
         {
+            int i = 1;
             var muninDb = new MuninDb();
             using (var db = new ILABClassic())
             {
                 foreach (var item in db.udklip.ToList())
                 {
                     string message = "";
+
+                    Console.Write("\r udklip {0}   ", i);
+                    i++;
 
                     try
                     {
@@ -228,15 +260,23 @@ namespace DBMigration
                             Attache = item.Mappe,
                             Paper = GetPaperEnum(item.Aviskode),
                             Comment = item.Note,
+                            DateTime = new DateTime(1799,1,1),
                             Title = item.Overskrift
                         };
+
+                        //datetime sat til default min date iflg. Datetime format i database
 
                         DateTime dt;
 
                         if (!DateTime.TryParse(item.Datering, out dt))
-                            message += string.Format("Udklip {0} har ikke angivet aflevering",item.UdklipsID);
+                            message += string.Format("\n\r Udklip {0} har ikke angivet aflevering", item.UdklipsID);
 
-                        clip.DateTime = dt;
+                        if (dt > SQLSrvMinDate)
+                            clip.DateTime = dt;
+                        else
+                        {
+                            message += string.Format("\n\r Udklip {0} er ikke korrekt dateret", item.UdklipsID);
+                        }
 
                         muninDb.Clips.Add(clip);
                         muninDb.SaveChanges();
@@ -296,17 +336,68 @@ namespace DBMigration
                         var cadaster = new Cadaster()
                         {
                             CadasterNb = item.MatrikelNr,
-                            Source = item.Kilde,
-                            CreatedYear = Int32.Parse(item.Oprettet),
-                            Year = Int32.Parse(item.Dato),
+                            Source = item.Kilde,                            
                             StamNr = item.Stamnr,
                             User = item.Bruger,
-                            Street = item.Vejnavn,
-                            Number = item.Vejnr,
-                            ZipNumber = Int32.Parse(item.Postnr),
-                            City = item.By,
                             Comment = item.Note                            
                         };
+
+                        if (string.IsNullOrEmpty(item.Vejnavn))
+                            message += string.Format("\n\r Matrikel {0} har ikke angivet vejnavn", item.MatrikelNr);
+                        else
+                        {
+                            cadaster.Street = item.Vejnavn;
+                        }
+
+                        if (string.IsNullOrEmpty(item.Vejnr))
+                            message += string.Format("\n\r Matrikel {0} har ikke angivet vejnummer", item.MatrikelNr);
+                        else
+                        {
+                            cadaster.Street = item.Vejnr;
+                        }
+
+                        if (string.IsNullOrEmpty(item.By))
+                            message += string.Format("\n\r Matrikel {0} har ikke angivet by", item.MatrikelNr);
+                        else
+                        {
+                            cadaster.City = item.By;
+                        }
+
+
+
+
+                        if (string.IsNullOrEmpty(item.Postnr))
+                            message += string.Format("\n\r Matrikel {0} har ikke korrekt postnr", item.MatrikelNr);
+                        else
+                        {
+                            int z;
+                            if (Int32.TryParse(item.Postnr, out z))
+                                cadaster.ZipNumber = z;
+                            else
+                            {
+                                message += string.Format("\n\r Matrikel {0} har ikke korrekt postnr", item.MatrikelNr);
+                            }
+                        }
+
+                        if (string.IsNullOrEmpty(item.Oprettet) || item.Oprettet.Length < 4)
+                            message += string.Format("String {0} har ikke angivet oprettelsesår", item.MatrikelNr);
+                        else
+                        {
+                            cadaster.CreatedYear = Int32.Parse(item.Oprettet.Substring(0,4));
+                        }
+
+                        if (string.IsNullOrEmpty(item.Dato) || item.Dato.Length < 4)
+                            message += string.Format("\n\r Matrikel {0} har ikke korrekt år", item.MatrikelNr);
+                        else
+                        {
+                            int d;
+                            if (Int32.TryParse(item.Dato.Substring(0, 4), out d))
+                                cadaster.Year = Int32.Parse(item.Dato.Substring(0, 4));
+                            else
+                            {
+                                message += string.Format("\n\r Matrikel {0} har ikke korrekt år", item.MatrikelNr);
+                            }
+                        }
 
                         muninDb.Cadasters.Add(cadaster);
                         muninDb.SaveChanges();
@@ -393,7 +484,7 @@ namespace DBMigration
 
                         };
                         if (map.MapType == MapType.Udefineret)
-                            message += string.Format("Kort {0} har ikke korrekt format angivet");
+                            message += string.Format("Kort {0} har ikke korrekt format angivet", item.Kortnr);
 
                         muninDb.Maps.Add(map);
                         muninDb.SaveChanges();
@@ -439,8 +530,9 @@ namespace DBMigration
                     }
                     catch (Exception ex)
                     {
-                        Log(ex.Message);
+                        message += string.Format("\n\r Kort {0} fejler med {1}", item.ArkivalieID, ex.Message);
                     }
+                    Log(message);
                 }
             }
 
@@ -581,17 +673,17 @@ namespace DBMigration
                         };
                         archive.ArchiveType = getArchiveType(item.ArkivType);
                         if (archive.ArchiveType == ArchiveType.Andet)
-                            message += string.Format("Arkfond {0} har ikke valid arkivfondtype");
+                            message += string.Format("Arkfond {0} har ikke valid arkivfondtype", item.ArkivNr);
 
                         var dt = mergeDatetime(item.StiftetYear, item.StiftetMonth, item.StiftetDay);
                         if (dt != DateTime.MinValue)
                             archive.Established = dt;
 
                         dt = mergeDatetime(item.AfsluttetYear, item.AfsluttetMonth, item.AfsluttetDay);
-                        if (dt != DateTime.MinValue)
-                        archive.ClosedDate = dt;
-
                         archive.Comment = item.Note;
+                        if (dt > DateTime.MinValue)
+                            archive.ClosedDate = dt;
+
                         muninDb.Archives.Add(archive);
                         muninDb.SaveChanges();
                     }
@@ -610,10 +702,11 @@ namespace DBMigration
 
             if (stiftetYear == null)
                 return DateTime.MinValue;
-            y = (int)stiftetDay.Value;
+            y = (int)stiftetYear.Value;
 
             if (stiftetMonth > 0)
                 m = (int)stiftetMonth.Value;
+
             if (stiftetDay > 0)
                 d = (int)stiftetDay.Value;
 
@@ -622,11 +715,13 @@ namespace DBMigration
 
         private static ArchiveType getArchiveType(string aType)
         {
-            if (aType == "")
+            if (string.IsNullOrEmpty(aType))
                 return ArchiveType.Andet;
 
             switch (aType.ToUpper())
             {
+                case "A":
+                    return ArchiveType.A;
                 case "E":
                     return ArchiveType.E;
                 case "F":
@@ -640,7 +735,7 @@ namespace DBMigration
             }
         }
 
-            private static bool CreateJournals()
+        private static void CreateJournals()
         {
             var muninDb = new MuninDb();
             using (var db = new ILABClassic())
@@ -677,6 +772,11 @@ namespace DBMigration
                         if (!DateTime.TryParse(journal.Afleveret.ToString(), out dt))
                             message += string.Format("Journal {0} har ikke angivet aflevering", journal.JournalID);
 
+                        int year = Int32.Parse(journal.JournalID.Split('/')[0]);
+
+                        if (dt == DateTime.MinValue)
+                            dt = new DateTime(year,1,1);
+
                         muninJournal.ReceiveDate = dt;
                         muninJournal.Comment = journal.Note;
                         if (newJournal)
@@ -685,6 +785,7 @@ namespace DBMigration
                         {
                             muninDb.Entry(muninJournal).State = EntityState.Modified;
                         }
+
                         muninDb.SaveChanges();
 
                     }
@@ -692,15 +793,13 @@ namespace DBMigration
                     {
                         message += "\r\n" + ex.Message;
                         Log(message);
-                        return false;
                     }
                     Log(message);
                 }
             }
-            return true;
         }
 
-        private static bool CreateProviders()
+        private static void CreateProviders()
         {
             var muninDb = new MuninDb();
 
@@ -712,17 +811,11 @@ namespace DBMigration
 
                     try
                     {
-                        var muninJournal = new Munin.DAL.Models.Journal()
-                        {
-                            JournalNb = giver.Journal
-                        };
-
-                        var s = muninDb.Journals.Add(muninJournal);
-                        muninDb.SaveChanges();
+                        var journal = GetJournal<Book>(giver.Journal,muninDb);
 
                         var provider = new Provider()
                         {
-                            Journal = muninJournal,
+                            Journal = journal,
                             Address = giver.Adresse,
                             Att = giver.Att,
                             Name = giver.Navn,
@@ -736,7 +829,7 @@ namespace DBMigration
 
                         provider.ZipCode = zipCode;
 
-                        DateTime dt = DateTime.Today;
+                        DateTime dt = journal.ReceiveDate;
 
                         if (giver.AflevDato == null)
                             message += string.Format("Giver {0} har ikke afleveringsdato. ", giver.GiverID);
@@ -747,20 +840,20 @@ namespace DBMigration
 
                         provider.Registrated = dt;
 
+                        muninDb.Providers.Add(provider);
+
                         muninDb.SaveChanges();
 
                     }
                     catch (Exception ex)
                     {
                         message += string.Format("Giver {0} fejlede med: {1}", giver.GiverID, ex.Message);
-                        return false;
                     }
 
                     Log(message);
                 }
                 
             }
-            return true;
         }
 
         private static void Log(string message)

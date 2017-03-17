@@ -1,0 +1,722 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MuninDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Archives">
+          <Key>
+            <PropertyRef Name="ArchiveId" />
+          </Key>
+          <Property Name="ArchiveId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ArchiveNb" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Definition" Type="nvarchar(max)" />
+          <Property Name="ArchiveType" Type="int" Nullable="false" />
+          <Property Name="Established" Type="datetime2" Precision="7" />
+          <Property Name="ClosedDate" Type="datetime2" Precision="7" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="BookId" />
+          </Key>
+          <Property Name="BookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookCode" Type="nvarchar(max)" />
+          <Property Name="DK5" Type="nvarchar(max)" />
+          <Property Name="Tag" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="SubTitle" Type="nvarchar(max)" />
+          <Property Name="Author" Type="nvarchar(max)" />
+          <Property Name="Editor" Type="nvarchar(max)" />
+          <Property Name="PublishYear" Type="int" Nullable="false" />
+          <Property Name="Attache" Type="nvarchar(max)" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="Journal_JournalId" Type="int" />
+        </EntityType>
+        <EntityType Name="Cadasters">
+          <Key>
+            <PropertyRef Name="CadasterId" />
+          </Key>
+          <Property Name="CadasterId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CadasterNb" Type="nvarchar(max)" />
+          <Property Name="Source" Type="nvarchar(max)" />
+          <Property Name="CreatedYear" Type="int" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="StamNr" Type="nvarchar(max)" />
+          <Property Name="User" Type="nvarchar(max)" />
+          <Property Name="Street" Type="nvarchar(max)" />
+          <Property Name="Number" Type="nvarchar(max)" />
+          <Property Name="Area" Type="nvarchar(max)" />
+          <Property Name="ZipNumber" Type="int" Nullable="false" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ChirchRecords">
+          <Key>
+            <PropertyRef Name="ChirchRecordId" />
+          </Key>
+          <Property Name="ChirchRecordId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Event" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clips">
+          <Key>
+            <PropertyRef Name="ClipId" />
+          </Key>
+          <Property Name="ClipId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="Attache" Type="nvarchar(max)" />
+          <Property Name="Paper" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Journals">
+          <Key>
+            <PropertyRef Name="JournalId" />
+          </Key>
+          <Property Name="JournalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JournalNb" Type="nvarchar(max)" />
+          <Property Name="ReceiveDate" Type="datetime" Nullable="false" />
+          <Property Name="Material" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Regs" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Maps">
+          <Key>
+            <PropertyRef Name="MapId" />
+          </Key>
+          <Property Name="MapId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MapNb" Type="nvarchar(max)" />
+          <Property Name="Title" Type="nvarchar(max)" />
+          <Property Name="MapType" Type="int" Nullable="false" />
+          <Property Name="Proportion" Type="nvarchar(max)" />
+          <Property Name="Publisher" Type="nvarchar(max)" />
+          <Property Name="PublishYear" Type="int" Nullable="false" />
+          <Property Name="RevisionYear" Type="int" Nullable="false" />
+          <Property Name="Area" Type="nvarchar(max)" />
+          <Property Name="Format" Type="nvarchar(max)" />
+          <Property Name="Material" Type="int" Nullable="false" />
+          <Property Name="Depot" Type="nvarchar(max)" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="Journal_JournalId" Type="int" />
+        </EntityType>
+        <EntityType Name="Pictures">
+          <Key>
+            <PropertyRef Name="PictureId" />
+          </Key>
+          <Property Name="PictureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PictureIndex" Type="nvarchar(max)" />
+          <Property Name="OrderNum" Type="nvarchar(max)" />
+          <Property Name="Tag" Type="nvarchar(max)" />
+          <Property Name="CDNb" Type="nvarchar(max)" />
+          <Property Name="Photograph" Type="nvarchar(max)" />
+          <Property Name="Size" Type="nvarchar(max)" />
+          <Property Name="PictureMaterial" Type="int" Nullable="false" />
+          <Property Name="Copyright" Type="bit" Nullable="false" />
+          <Property Name="Provision" Type="bit" Nullable="false" />
+          <Property Name="Placed" Type="nvarchar(max)" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="Journal_JournalId" Type="int" />
+        </EntityType>
+        <EntityType Name="Providers">
+          <Key>
+            <PropertyRef Name="ProviderId" />
+          </Key>
+          <Property Name="ProviderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Att" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="ZipCode" Type="int" Nullable="false" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="Registrated" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="Journal_JournalId" Type="int" />
+        </EntityType>
+        <EntityType Name="Sequences">
+          <Key>
+            <PropertyRef Name="SequenceId" />
+          </Key>
+          <Property Name="SequenceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SequenceNb" Type="nvarchar(max)" />
+          <Property Name="DateTime" Type="datetime" Nullable="false" />
+          <Property Name="Source" Type="nvarchar(max)" />
+          <Property Name="Interviewer" Type="nvarchar(max)" />
+          <Property Name="Copyright" Type="bit" Nullable="false" />
+          <Property Name="SequenceType" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar(max)" />
+          <Property Name="Journal_JournalId" Type="int" />
+        </EntityType>
+        <Association Name="FK_dbo_Books_dbo_Journals_Journal_JournalId">
+          <End Role="Journals" Type="Self.Journals" Multiplicity="0..1" />
+          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journals">
+              <PropertyRef Name="JournalId" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="Journal_JournalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Maps_dbo_Journals_Journal_JournalId">
+          <End Role="Journals" Type="Self.Journals" Multiplicity="0..1" />
+          <End Role="Maps" Type="Self.Maps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journals">
+              <PropertyRef Name="JournalId" />
+            </Principal>
+            <Dependent Role="Maps">
+              <PropertyRef Name="Journal_JournalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pictures_dbo_Journals_Journal_JournalId">
+          <End Role="Journals" Type="Self.Journals" Multiplicity="0..1" />
+          <End Role="Pictures" Type="Self.Pictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journals">
+              <PropertyRef Name="JournalId" />
+            </Principal>
+            <Dependent Role="Pictures">
+              <PropertyRef Name="Journal_JournalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Providers_dbo_Journals_Journal_JournalId">
+          <End Role="Journals" Type="Self.Journals" Multiplicity="0..1" />
+          <End Role="Providers" Type="Self.Providers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journals">
+              <PropertyRef Name="JournalId" />
+            </Principal>
+            <Dependent Role="Providers">
+              <PropertyRef Name="Journal_JournalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Sequences_dbo_Journals_Journal_JournalId">
+          <End Role="Journals" Type="Self.Journals" Multiplicity="0..1" />
+          <End Role="Sequences" Type="Self.Sequences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journals">
+              <PropertyRef Name="JournalId" />
+            </Principal>
+            <Dependent Role="Sequences">
+              <PropertyRef Name="Journal_JournalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MuninDbModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Archives" EntityType="Self.Archives" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cadasters" EntityType="Self.Cadasters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChirchRecords" EntityType="Self.ChirchRecords" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clips" EntityType="Self.Clips" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Journals" EntityType="Self.Journals" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Maps" EntityType="Self.Maps" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pictures" EntityType="Self.Pictures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Providers" EntityType="Self.Providers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sequences" EntityType="Self.Sequences" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Books_dbo_Journals_Journal_JournalId" Association="Self.FK_dbo_Books_dbo_Journals_Journal_JournalId">
+            <End Role="Journals" EntitySet="Journals" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Maps_dbo_Journals_Journal_JournalId" Association="Self.FK_dbo_Maps_dbo_Journals_Journal_JournalId">
+            <End Role="Journals" EntitySet="Journals" />
+            <End Role="Maps" EntitySet="Maps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pictures_dbo_Journals_Journal_JournalId" Association="Self.FK_dbo_Pictures_dbo_Journals_Journal_JournalId">
+            <End Role="Journals" EntitySet="Journals" />
+            <End Role="Pictures" EntitySet="Pictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Providers_dbo_Journals_Journal_JournalId" Association="Self.FK_dbo_Providers_dbo_Journals_Journal_JournalId">
+            <End Role="Journals" EntitySet="Journals" />
+            <End Role="Providers" EntitySet="Providers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Sequences_dbo_Journals_Journal_JournalId" Association="Self.FK_dbo_Sequences_dbo_Journals_Journal_JournalId">
+            <End Role="Journals" EntitySet="Journals" />
+            <End Role="Sequences" EntitySet="Sequences" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MuninDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Archives">
+          <Key>
+            <PropertyRef Name="ArchiveId" />
+          </Key>
+          <Property Name="ArchiveId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ArchiveNb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Definition" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ArchiveType" Type="Int32" Nullable="false" />
+          <Property Name="Established" Type="DateTime" Precision="7" />
+          <Property Name="ClosedDate" Type="DateTime" Precision="7" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Books">
+          <Key>
+            <PropertyRef Name="BookId" />
+          </Key>
+          <Property Name="BookId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DK5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tag" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubTitle" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Author" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Editor" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PublishYear" Type="Int32" Nullable="false" />
+          <Property Name="Attache" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Journal_JournalId" Type="Int32" />
+          <NavigationProperty Name="Journals" Relationship="Self.FK_dbo_Books_dbo_Journals_Journal_JournalId" FromRole="Books" ToRole="Journals" />
+        </EntityType>
+        <EntityType Name="Cadasters">
+          <Key>
+            <PropertyRef Name="CadasterId" />
+          </Key>
+          <Property Name="CadasterId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CadasterNb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedYear" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="StamNr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="User" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ZipNumber" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ChirchRecords">
+          <Key>
+            <PropertyRef Name="ChirchRecordId" />
+          </Key>
+          <Property Name="ChirchRecordId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Event" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clips">
+          <Key>
+            <PropertyRef Name="ClipId" />
+          </Key>
+          <Property Name="ClipId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Attache" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Paper" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Journals">
+          <Key>
+            <PropertyRef Name="JournalId" />
+          </Key>
+          <Property Name="JournalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JournalNb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiveDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Material" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="Regs" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Books" Relationship="Self.FK_dbo_Books_dbo_Journals_Journal_JournalId" FromRole="Journals" ToRole="Books" />
+          <NavigationProperty Name="Maps" Relationship="Self.FK_dbo_Maps_dbo_Journals_Journal_JournalId" FromRole="Journals" ToRole="Maps" />
+          <NavigationProperty Name="Pictures" Relationship="Self.FK_dbo_Pictures_dbo_Journals_Journal_JournalId" FromRole="Journals" ToRole="Pictures" />
+          <NavigationProperty Name="Providers" Relationship="Self.FK_dbo_Providers_dbo_Journals_Journal_JournalId" FromRole="Journals" ToRole="Providers" />
+          <NavigationProperty Name="Sequences" Relationship="Self.FK_dbo_Sequences_dbo_Journals_Journal_JournalId" FromRole="Journals" ToRole="Sequences" />
+        </EntityType>
+        <EntityType Name="Maps">
+          <Key>
+            <PropertyRef Name="MapId" />
+          </Key>
+          <Property Name="MapId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MapNb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MapType" Type="Int32" Nullable="false" />
+          <Property Name="Proportion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Publisher" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PublishYear" Type="Int32" Nullable="false" />
+          <Property Name="RevisionYear" Type="Int32" Nullable="false" />
+          <Property Name="Area" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Format" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Material" Type="Int32" Nullable="false" />
+          <Property Name="Depot" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Journal_JournalId" Type="Int32" />
+          <NavigationProperty Name="Journals" Relationship="Self.FK_dbo_Maps_dbo_Journals_Journal_JournalId" FromRole="Maps" ToRole="Journals" />
+        </EntityType>
+        <EntityType Name="Pictures">
+          <Key>
+            <PropertyRef Name="PictureId" />
+          </Key>
+          <Property Name="PictureId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PictureIndex" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrderNum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Tag" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CDNb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Photograph" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PictureMaterial" Type="Int32" Nullable="false" />
+          <Property Name="Copyright" Type="Boolean" Nullable="false" />
+          <Property Name="Provision" Type="Boolean" Nullable="false" />
+          <Property Name="Placed" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Journal_JournalId" Type="Int32" />
+          <NavigationProperty Name="Journals" Relationship="Self.FK_dbo_Pictures_dbo_Journals_Journal_JournalId" FromRole="Pictures" ToRole="Journals" />
+        </EntityType>
+        <EntityType Name="Providers">
+          <Key>
+            <PropertyRef Name="ProviderId" />
+          </Key>
+          <Property Name="ProviderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Att" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Registrated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Journal_JournalId" Type="Int32" />
+          <NavigationProperty Name="Journals" Relationship="Self.FK_dbo_Providers_dbo_Journals_Journal_JournalId" FromRole="Providers" ToRole="Journals" />
+        </EntityType>
+        <EntityType Name="Sequences">
+          <Key>
+            <PropertyRef Name="SequenceId" />
+          </Key>
+          <Property Name="SequenceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SequenceNb" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Source" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Interviewer" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Copyright" Type="Boolean" Nullable="false" />
+          <Property Name="SequenceType" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Journal_JournalId" Type="Int32" />
+          <NavigationProperty Name="Journals" Relationship="Self.FK_dbo_Sequences_dbo_Journals_Journal_JournalId" FromRole="Sequences" ToRole="Journals" />
+        </EntityType>
+        <Association Name="FK_dbo_Books_dbo_Journals_Journal_JournalId">
+          <End Role="Journals" Type="Self.Journals" Multiplicity="0..1" />
+          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journals">
+              <PropertyRef Name="JournalId" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="Journal_JournalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Maps_dbo_Journals_Journal_JournalId">
+          <End Role="Journals" Type="Self.Journals" Multiplicity="0..1" />
+          <End Role="Maps" Type="Self.Maps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journals">
+              <PropertyRef Name="JournalId" />
+            </Principal>
+            <Dependent Role="Maps">
+              <PropertyRef Name="Journal_JournalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Pictures_dbo_Journals_Journal_JournalId">
+          <End Role="Journals" Type="Self.Journals" Multiplicity="0..1" />
+          <End Role="Pictures" Type="Self.Pictures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journals">
+              <PropertyRef Name="JournalId" />
+            </Principal>
+            <Dependent Role="Pictures">
+              <PropertyRef Name="Journal_JournalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Providers_dbo_Journals_Journal_JournalId">
+          <End Role="Journals" Type="Self.Journals" Multiplicity="0..1" />
+          <End Role="Providers" Type="Self.Providers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journals">
+              <PropertyRef Name="JournalId" />
+            </Principal>
+            <Dependent Role="Providers">
+              <PropertyRef Name="Journal_JournalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Sequences_dbo_Journals_Journal_JournalId">
+          <End Role="Journals" Type="Self.Journals" Multiplicity="0..1" />
+          <End Role="Sequences" Type="Self.Sequences" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Journals">
+              <PropertyRef Name="JournalId" />
+            </Principal>
+            <Dependent Role="Sequences">
+              <PropertyRef Name="Journal_JournalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MuninDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Archives" EntityType="Self.Archives" />
+          <EntitySet Name="Books" EntityType="Self.Books" />
+          <EntitySet Name="Cadasters" EntityType="Self.Cadasters" />
+          <EntitySet Name="ChirchRecords" EntityType="Self.ChirchRecords" />
+          <EntitySet Name="Clips" EntityType="Self.Clips" />
+          <EntitySet Name="Journals" EntityType="Self.Journals" />
+          <EntitySet Name="Maps" EntityType="Self.Maps" />
+          <EntitySet Name="Pictures" EntityType="Self.Pictures" />
+          <EntitySet Name="Providers" EntityType="Self.Providers" />
+          <EntitySet Name="Sequences" EntityType="Self.Sequences" />
+          <AssociationSet Name="FK_dbo_Books_dbo_Journals_Journal_JournalId" Association="Self.FK_dbo_Books_dbo_Journals_Journal_JournalId">
+            <End Role="Journals" EntitySet="Journals" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Maps_dbo_Journals_Journal_JournalId" Association="Self.FK_dbo_Maps_dbo_Journals_Journal_JournalId">
+            <End Role="Journals" EntitySet="Journals" />
+            <End Role="Maps" EntitySet="Maps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Pictures_dbo_Journals_Journal_JournalId" Association="Self.FK_dbo_Pictures_dbo_Journals_Journal_JournalId">
+            <End Role="Journals" EntitySet="Journals" />
+            <End Role="Pictures" EntitySet="Pictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Providers_dbo_Journals_Journal_JournalId" Association="Self.FK_dbo_Providers_dbo_Journals_Journal_JournalId">
+            <End Role="Journals" EntitySet="Journals" />
+            <End Role="Providers" EntitySet="Providers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Sequences_dbo_Journals_Journal_JournalId" Association="Self.FK_dbo_Sequences_dbo_Journals_Journal_JournalId">
+            <End Role="Journals" EntitySet="Journals" />
+            <End Role="Sequences" EntitySet="Sequences" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MuninDbModelStoreContainer" CdmEntityContainer="MuninDbEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="MuninDbModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Archives">
+            <EntityTypeMapping TypeName="MuninDbModel.Archives">
+              <MappingFragment StoreEntitySet="Archives">
+                <ScalarProperty Name="ArchiveId" ColumnName="ArchiveId" />
+                <ScalarProperty Name="ArchiveNb" ColumnName="ArchiveNb" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Definition" ColumnName="Definition" />
+                <ScalarProperty Name="ArchiveType" ColumnName="ArchiveType" />
+                <ScalarProperty Name="Established" ColumnName="Established" />
+                <ScalarProperty Name="ClosedDate" ColumnName="ClosedDate" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="MuninDbModel.Books">
+              <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="BookCode" ColumnName="BookCode" />
+                <ScalarProperty Name="DK5" ColumnName="DK5" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="SubTitle" ColumnName="SubTitle" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="PublishYear" ColumnName="PublishYear" />
+                <ScalarProperty Name="Attache" ColumnName="Attache" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Journal_JournalId" ColumnName="Journal_JournalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cadasters">
+            <EntityTypeMapping TypeName="MuninDbModel.Cadasters">
+              <MappingFragment StoreEntitySet="Cadasters">
+                <ScalarProperty Name="CadasterId" ColumnName="CadasterId" />
+                <ScalarProperty Name="CadasterNb" ColumnName="CadasterNb" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="CreatedYear" ColumnName="CreatedYear" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="StamNr" ColumnName="StamNr" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="ZipNumber" ColumnName="ZipNumber" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChirchRecords">
+            <EntityTypeMapping TypeName="MuninDbModel.ChirchRecords">
+              <MappingFragment StoreEntitySet="ChirchRecords">
+                <ScalarProperty Name="ChirchRecordId" ColumnName="ChirchRecordId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Event" ColumnName="Event" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clips">
+            <EntityTypeMapping TypeName="MuninDbModel.Clips">
+              <MappingFragment StoreEntitySet="Clips">
+                <ScalarProperty Name="ClipId" ColumnName="ClipId" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="Attache" ColumnName="Attache" />
+                <ScalarProperty Name="Paper" ColumnName="Paper" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Journals">
+            <EntityTypeMapping TypeName="MuninDbModel.Journals">
+              <MappingFragment StoreEntitySet="Journals">
+                <ScalarProperty Name="JournalId" ColumnName="JournalId" />
+                <ScalarProperty Name="JournalNb" ColumnName="JournalNb" />
+                <ScalarProperty Name="ReceiveDate" ColumnName="ReceiveDate" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Regs" ColumnName="Regs" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Maps">
+            <EntityTypeMapping TypeName="MuninDbModel.Maps">
+              <MappingFragment StoreEntitySet="Maps">
+                <ScalarProperty Name="MapId" ColumnName="MapId" />
+                <ScalarProperty Name="MapNb" ColumnName="MapNb" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="MapType" ColumnName="MapType" />
+                <ScalarProperty Name="Proportion" ColumnName="Proportion" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
+                <ScalarProperty Name="PublishYear" ColumnName="PublishYear" />
+                <ScalarProperty Name="RevisionYear" ColumnName="RevisionYear" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Format" ColumnName="Format" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="Depot" ColumnName="Depot" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Journal_JournalId" ColumnName="Journal_JournalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pictures">
+            <EntityTypeMapping TypeName="MuninDbModel.Pictures">
+              <MappingFragment StoreEntitySet="Pictures">
+                <ScalarProperty Name="PictureId" ColumnName="PictureId" />
+                <ScalarProperty Name="PictureIndex" ColumnName="PictureIndex" />
+                <ScalarProperty Name="OrderNum" ColumnName="OrderNum" />
+                <ScalarProperty Name="Tag" ColumnName="Tag" />
+                <ScalarProperty Name="CDNb" ColumnName="CDNb" />
+                <ScalarProperty Name="Photograph" ColumnName="Photograph" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="PictureMaterial" ColumnName="PictureMaterial" />
+                <ScalarProperty Name="Copyright" ColumnName="Copyright" />
+                <ScalarProperty Name="Provision" ColumnName="Provision" />
+                <ScalarProperty Name="Placed" ColumnName="Placed" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Journal_JournalId" ColumnName="Journal_JournalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Providers">
+            <EntityTypeMapping TypeName="MuninDbModel.Providers">
+              <MappingFragment StoreEntitySet="Providers">
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Att" ColumnName="Att" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Registrated" ColumnName="Registrated" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Journal_JournalId" ColumnName="Journal_JournalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sequences">
+            <EntityTypeMapping TypeName="MuninDbModel.Sequences">
+              <MappingFragment StoreEntitySet="Sequences">
+                <ScalarProperty Name="SequenceId" ColumnName="SequenceId" />
+                <ScalarProperty Name="SequenceNb" ColumnName="SequenceNb" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Interviewer" ColumnName="Interviewer" />
+                <ScalarProperty Name="Copyright" ColumnName="Copyright" />
+                <ScalarProperty Name="SequenceType" ColumnName="SequenceType" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Journal_JournalId" ColumnName="Journal_JournalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
