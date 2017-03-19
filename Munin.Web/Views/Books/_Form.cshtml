@@ -1,0 +1,43 @@
+﻿<div class="form-horizontal" ng-show="pageLoaded">
+    <h4>Billeder</h4>
+    <hr />
+
+    <div asp-net-error message={{ctrl.message}}></div>
+
+    <div asp-net-text-element label="Bogkode" model="ctrl.model.bookCode"></div>
+    <div asp-net-text-element label="DK5" model="ctrl.model.dK5" placeholder="DK5-kode"></div>
+    <div asp-net-text-element label="Emne" model="ctrl.model.tag" placeholder="Emneord"></div>
+    <div asp-net-text-element label="Titel" model="ctrl.model.title" placeholder="Titel"></div>
+    <div asp-net-text-element label="Undertitel" model="ctrl.model.subTitle" placeholder="Undertitel"></div>
+    <div asp-net-text-element label="Forfatter" model="ctrl.model.author" placeholder="Forfatter"></div>
+    <div asp-net-text-element label="Redaktør" model="ctrl.model.editor" placeholder="Redaktør"></div>
+    <div asp-net-text-element label="Udgivelsesår" model="ctrl.model.publishYear" placeholder="Udgivelsesår"></div>
+
+    <div class="form-group">
+        <div class="row">
+            <label class="control-label col-md-2">
+                <label>Journal</label>
+            </label>
+            <div class="col-md-10">
+                <ui-select ng-model="ctrl.journal" theme="select2" ng-disabled="ctrl.disabled" style="min-width: 300px;" title="Vælg journal">
+                    <ui-select-match placeholder="Vælg en journal">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices repeat="journal in ctrl.journaler | propsFilter: {value: $select.search, text: $select.search}">
+                        <small>{{journal.text}}</small>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+
+    <div asp-net-text-area label="Note" model="ctrl.model.comment"></div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-2">&nbsp;</div>
+            <div class="col-md-10">
+                <input type="button" value="Gem" class="btn btn-default" ng-click="save()" />
+            </div>
+        </div>
+    </div>
+
+</div>

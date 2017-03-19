@@ -7,7 +7,7 @@
 
 <h2>Opret</h2>
 
-<div ng-controller="pictureFormCtrl as ctrl" ng-init="initpage()">
+<div ng-controller="booksFormCtrl as ctrl" ng-init="initpage()">
     @Html.Hidden("ID", Model.PictureId, new { @id = "ID" })
     @Html.Partial("_Form")
 </div>

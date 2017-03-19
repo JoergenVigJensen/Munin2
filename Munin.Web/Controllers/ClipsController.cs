@@ -105,7 +105,7 @@ namespace Munin.Web.Controllers
                         }).Skip(flicks).Take(query.Size);
                     }
 
-                    var listResult = new ItemListVm()
+                    var listResult = new ItemListVm<ListRowDto>()
                     {
                         Count = l.Count,
                         Pages = l.Count / query.Size,
