@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Web;
+using Munin.DAL;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
@@ -32,6 +35,8 @@ namespace Munin.Web
                 var v = Enum.GetValues(t);
                 foreach (var e in v)
                 {
+
+                    //keyList.Add(new UISelectItem() { Value = (int)e, Text = GetEnumDescription<T>((T)e)});
                     keyList.Add(new UISelectItem() { Value = (int)e, Text = e.ToString() });
                 }
 
@@ -40,6 +45,27 @@ namespace Munin.Web
             return null;
         }
 
+
+        public static string GetDescription(this Enum value)
+        {
+            Type type = value.GetType();
+            string name = Enum.GetName(type, value);
+            if (name != null)
+            {
+                FieldInfo field = type.GetField(name);
+                if (field != null)
+                {
+                    DescriptionAttribute attr =
+                           Attribute.GetCustomAttribute(field,
+                           typeof(DescriptionAttribute)) as DescriptionAttribute;
+                    if (attr != null)
+                    {
+                        return attr.Description;
+                    }
+                }
+            }
+            return null;
+        }
 
         public static string GetEnumDescription<T>(T source)
         {
