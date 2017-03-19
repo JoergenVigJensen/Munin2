@@ -31,7 +31,9 @@ namespace Munin.Web
                         "~/Scripts/App/ClipsFormCtrl.js",
                         "~/Scripts/App/ClipsListCtrl.js",
                         "~/Scripts/App/BookFormCtrl.js",
-                        "~/Scripts/App/BookListCtrl.js"));
+                        "~/Scripts/App/BookListCtrl.js",
+                        "~/Scripts/App/SequenceFormCtrl.js",
+                        "~/Scripts/App/SequenceListCtrl.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.validate*"));
