@@ -128,7 +128,7 @@ namespace Munin.Web.Controllers
                         if (item != null)
                         {
                             vm.Model.DateTime = item.DateTime;
-
+                            vm.Model.Journal = item.Journal;
                             vm.Model.SequenceId = item.SequenceId;
                             vm.Model.Comment = item.Comment;
                             vm.Model.DateTime = item.DateTime;
