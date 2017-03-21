@@ -65,6 +65,19 @@
         });
     }
 
+    $scope.getNewIndex = function() {
+        //var snb = JSON.stringify(vm.model.sequenceNb, null, 2);
+        $http.post('/Sequences/getSesquenceNb/', { seqType: vm.seqType.value} ).then(function (result) {
+            if (result.data.success === true) {
+                vm.model.sequenceNb = result.data.output;
+            }
+            vm.message = result.data.message;
+        }, function (result) {
+            console.log(result);
+            vm.message = 'Der opstod en fejl.';
+        });
+    }
+
     $scope.disabled = false;
 
 

@@ -41,11 +41,11 @@ namespace Munin.Web.Controllers
                         string[] sQuery = query.Q.Split(' ');
                         for (int i = 0; i < sQuery.Length; i++)
                         {
-                            l = l.Where(x =>                                                        
+                            l = l.Where(x =>
                                 (x.SequenceNb.ToLower().Contains(sQuery[i].ToLower())) ||
                                 (x.Comment != null && x.Comment.ToLower().Contains(sQuery[i].ToLower())) ||
                                 (x.DateTime != null && x.DateTime.ToString().ToLower().Contains(sQuery[i].ToLower()))
-                                ).ToList();
+                            ).ToList();
                         }
                     }
 
@@ -115,7 +115,9 @@ namespace Munin.Web.Controllers
                 using (MuninDb db = new MuninDb())
                 {
                     vm.JournalList =
-                       db.Journals.Where(x => x.JournalNb != null).Select(x => new UISelectItem() { Value = x.JournalId, Text = x.JournalNb }).ToList();
+                        db.Journals.Where(x => x.JournalNb != null)
+                            .Select(x => new UISelectItem() {Value = x.JournalId, Text = x.JournalNb})
+                            .ToList();
 
                     vm.SequenceTypes = Utils.SelectListOf<SequenceType>();
                     vm.Model = new Sequence();
@@ -123,7 +125,7 @@ namespace Munin.Web.Controllers
                     if (id > 0)
                     {
                         var item = await db.Sequences
-                            .Include(x=>x.Journal)
+                            .Include(x => x.Journal)
                             .FirstOrDefaultAsync(x => x.SequenceId == id);
                         if (item != null)
                         {
@@ -140,10 +142,9 @@ namespace Munin.Web.Controllers
                         }
                     }
                     else
-                    {
-                        var seqIndex = db.Sequences.OrderByDescending(x => x.SequenceNb).First().SequenceNb;
-                        int bindex = Int32.Parse(seqIndex.Split('.')[1]);
-                        bindex++;
+                    {                        
+                        vm.Model.SequenceType = SequenceType.Lydbånd;
+                        vm.Model.SequenceNb = GetNextIndex(vm.Model.SequenceType);
                         vm.Model.DateTime = DateTime.Now.Date;
                     }
 
@@ -177,7 +178,9 @@ namespace Munin.Web.Controllers
 
                     if (model.SequenceId > 0)
                     {
-                        dbModel = await db.Sequences.Include(x=>x.Journal).FirstOrDefaultAsync(x => x.SequenceId == model.SequenceId);
+                        dbModel =
+                            await db.Sequences.Include(x => x.Journal)
+                                .FirstOrDefaultAsync(x => x.SequenceId == model.SequenceId);
                         if (dbModel == null)
                             throw new Exception(string.Format("Udklip med id {0} blev ikke fundet", model.SequenceId));
                     }
@@ -204,7 +207,7 @@ namespace Munin.Web.Controllers
                     }
 
                     await db.SaveChangesAsync();
-                    return Json(new { success = true, message = "" });
+                    return Json(new {success = true, message = ""});
                 }
             }
             catch (Exception ex)
@@ -226,6 +229,94 @@ namespace Munin.Web.Controllers
                 });
             }
 
+        }
+
+        [HttpPost]
+        public ActionResult GetSesquenceNb(int seqType)
+        {
+            try
+            {
+                string output = GetNextIndex((SequenceType)seqType);
+
+                //string output = GetNextIndex(seqNumber);
+
+                return Json(new {success = true, output});
+            }
+            catch (Exception ex)
+            {
+                return Json(new {success = false, message = ex.Message});
+            }
+
+        }
+
+        private string GetNextIndex(string seqNumber)
+        {
+            using (var db = new MuninDb())
+            {
+                if (seqNumber.Length < 2)
+                        throw new Exception("Sekevenstypen er skal starte med mindst 2 bogstaver.");
+
+                string preFix = seqNumber.Split('.')[0];
+                int counter = 1;
+
+                var item = db.Sequences.Where(x => x.SequenceNb.ToLower().StartsWith(preFix.ToLower())).OrderByDescending(x => x.
+                SequenceNb).First();
+
+                if (item != null)
+                {
+                    string[] index = item.SequenceNb.Split('.');
+                    if (index.Length == 2)
+                    {
+                        if (Int32.TryParse(index[1], out counter))
+                            counter++;
+                        else
+                        {
+                            counter = 1;
+                        }
+                    }
+                }
+                return string.Format("{0}.{1}", preFix, counter.ToString().PadLeft(4, '0'));
+            }
+        }
+
+        private string GetNextIndex(SequenceType seqType)
+        {
+            switch (seqType)
+            {
+                case SequenceType.Lydbånd:
+                case SequenceType.LY:
+                case SequenceType.MC:
+                case SequenceType.MC2x:
+                {
+                    return GetNextIndex("Ly.0001");
+                    break;
+                }                
+                case SequenceType.VHS:
+                case SequenceType.video:
+                {
+                    return GetNextIndex("Vi.0001");
+                    break;
+                }
+                case SequenceType.DVD:
+                {
+                    return GetNextIndex("Dv.0001");
+                    break;
+                }
+                case SequenceType.Filmfarve8mm:
+                case SequenceType.SmalfilmSH8mm:
+                case SequenceType.Smalfilm8mm:
+                case SequenceType.mmSmalfilm95mm:
+                case SequenceType.Superfilm8mm:
+                {
+                    return GetNextIndex("Fi.0001");
+                    break;
+                }
+                default:
+                {
+                    return GetNextIndex("An.0001");
+                    break;
+                }
+            }
         }
 
 
