@@ -43,10 +43,10 @@ namespace Munin.Web.Controllers
                         {
                             l = l.Where(x =>
                                 (x.BookCode.ToLower().Contains(sQuery[i].ToLower())) ||
-                                (x.Title.ToLower().Contains(sQuery[i].ToLower())) ||
-                                (x.SubTitle.ToLower().Contains(sQuery[i].ToLower())) ||
-                                (x.Author.ToLower().Contains(sQuery[i].ToLower())) ||
-                                (x.Editor.ToLower().Contains(sQuery[i].ToLower())) ||
+                                (x.Title != null && x.Title.ToLower().Contains(sQuery[i].ToLower())) ||
+                                (x.SubTitle != null && x.SubTitle.ToLower().Contains(sQuery[i].ToLower())) ||
+                                (x.Author != null && x.Author.ToLower().Contains(sQuery[i].ToLower())) ||
+                                (x.Editor != null && x.Editor.ToLower().Contains(sQuery[i].ToLower())) ||
                                 (x.Comment != null && x.Comment.ToLower().Contains(sQuery[i].ToLower()))
                                 ).ToList();
                         }

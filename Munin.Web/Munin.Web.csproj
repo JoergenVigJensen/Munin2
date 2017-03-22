@@ -170,6 +170,8 @@
     <Compile Include="ViewModels\ItemListVm.cs" />
     <Compile Include="ViewModels\ListQuery.cs" />
     <Compile Include="ViewModels\ListRowDto.cs" />
+    <Compile Include="ViewModels\MapListDto.cs" />
+    <Compile Include="ViewModels\MapVm.cs" />
     <Compile Include="ViewModels\PictureVm.cs" />
     <Compile Include="ViewModels\SequenceVm.cs" />
   </ItemGroup>
@@ -235,6 +237,8 @@
     <Content Include="Scripts\App\ClipsFormCtrl.js" />
     <Content Include="Scripts\App\ClipsListCtrl.js" />
     <Content Include="Scripts\App\Filters.js" />
+    <Content Include="Scripts\App\MapFormCtrl.js" />
+    <Content Include="Scripts\App\MapListCtrl.js" />
     <Content Include="Scripts\App\MuninApp.js" />
     <Content Include="Scripts\App\PictureFormCtrl.js" />
     <Content Include="Scripts\App\PictureListCtrl.js" />
@@ -370,6 +374,7 @@
     <Content Include="Views\Clips\_Form.cshtml" />
     <Content Include="Views\Books\_Form.cshtml" />
     <Content Include="Views\Sequences\_Form.cshtml" />
+    <Content Include="Views\Maps\_Form.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,69 @@
+﻿
+<div class="form-horizontal" ng-show="pageLoaded">
+    <h4>Kort</h4>
+    <hr />
+
+    <div asp-net-error message={{ctrl.message}}></div>
+
+    <div asp-net-text-element label="Kortnummer" model="ctrl.model.mapNb"></div>
+    <div asp-net-text-element label="Titel" model="ctrl.model.title" placeholder="Titel på kort"></div>
+    <div asp-net-text-element label="Udgiver" model="ctrl.model.publisher" placeholder="Navn på udgiver"></div>
+    <div asp-net-text-element label="Udgivelsesår" model="ctrl.model.publishYear" placeholder="Udgivelsesår"></div>
+    <div asp-net-text-element label="Område" model="ctrl.model.area" placeholder="Fotografen"></div>
+    <div asp-net-text-element label="Format" model="ctrl.model.format" placeholder="Format af kort"></div>
+    <div asp-net-text-element label="Depot" model="ctrl.model.depot" placeholder="Depot"></div>
+
+    <div class="form-group">
+        <div class="row">
+            <label class="control-label col-md-2">
+                <label>Materiale</label>
+            </label>
+            <div class="col-md-10">
+                <select class="form-control" id="Material" name="Material" ng-model="ctrl.material">
+                    <option ng-repeat="option in ctrl.materialList" value="{{option.value}}">{{option.text}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="row">
+            <label class="control-label col-md-2">
+                <label>Korttype</label>
+            </label>
+            <div class="col-md-10">
+                <select class="form-control" id="MapType" name="MapType" ng-model="ctrl.mapType" ng-change="jensen()">
+                    <option ng-repeat="option in ctrl.mapTypes" value="{{option.value}}">{{option.text}}</option>
+                </select> 
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <label class="control-label col-md-2">
+                <label>Journal</label>
+            </label>
+            <div class="col-md-10">
+                <ui-select ng-model="ctrl.journal" theme="select2" ng-disabled="ctrl.disabled" style="min-width: 300px;" title="Vælg journal">
+                    <ui-select-match placeholder="Vælg en journal">{{$select.selected.text}}</ui-select-match>
+                    <ui-select-choices repeat="journal in ctrl.journaler | propsFilter: {value: $select.search, text: $select.search}">
+                        <small>{{journal.text}}</small>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </div>
+    </div>
+
+    <div asp-net-text-area label="Note" model="ctrl.model.comment"></div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-2">&nbsp;</div>
+            <div class="col-md-10">
+                <input type="button" value="Gem" class="btn btn-default" ng-click="save()" />
+            </div>
+        </div>
+    </div>
+
+</div>

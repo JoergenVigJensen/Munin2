@@ -3,14 +3,29 @@
     <hr />
 
     <div asp-net-error message={{ctrl.message}}></div>
+    
+    <div class="form-group">
+        <div class="row">
+            <label class="control-label col-md-2">Sekvens-index</label>
+            <div class="col-md-10">               
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <input style="width: 150px" type="text" class="form-control" ng-model="ctrl.model.sequenceNb" />
+                        <button type="button" class="btn btn-default" ng-click="getNewIndex()"><i class="glyphicon glyphicon-refresh"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
 
-    <div asp-net-text-element label="Sekvens-index" model="ctrl.model.sequenceNb"></div>
+    <!--<div asp-net-text-element label="Sekvens-index" model="ctrl.model.sequenceNb"></div>-->
     <div asp-net-text-element label="Kilde" model="ctrl.model.source" placeholder="Kilde"></div>
     <div asp-net-text-element label="Interviewer" model="ctrl.model.interviewer" placeholder="Interviewer"></div>
     <div asp-net-check-element label="Ophavsret" model="ctrl.model.copyright"></div>
 
     
-    <div><span class="btn btn-success glyphicon-refresh" ng-click="getNewIndex()"></span></div>
+    
 
     <div class="form-group">
         <div class="row">
@@ -24,7 +39,8 @@
                         <small>{{seqType.text}}</small>
                     </ui-select-choices>
                 </ui-select>
-            </div>
+                
+            </div>            
         </div>
     </div>
 

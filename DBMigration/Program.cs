@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Linq;
 using System.IO;
+using System.Runtime.InteropServices.WindowsRuntime;
 using Munin.DAL;
 using Munin.DAL.Models;
 using ILABDb.DAL;
@@ -479,6 +480,7 @@ namespace DBMigration
                             Journal = journal,
                             MapNb = item.Kortnr,
                             Title = item.Navn,
+                            Material = GetMaterial(item.Materiale),
                             MapType = GetMapType(item.KortType),
                             Comment = item.Note,
                             Format = item.Format,
@@ -486,7 +488,8 @@ namespace DBMigration
                             Publisher = item.Udgiver,
                             PublishYear = (item.DateringAar == null)?0 : item.DateringAar.Value,
                             RevisionYear = (item.RevAar == null) ? 0 : item.RevAar.Value,
-                            Depot = item.Depot
+                            Depot = item.Depot,
+                            Proportion = item.Propertion
 
                         };
                         if (map.MapType == MapType.Udefineret)
@@ -542,6 +545,129 @@ namespace DBMigration
                 }
             }
 
+        }
+
+
+        private static MapMaterial GetMaterial(string material)
+        {
+
+                if (material.ToLower().Contains("fotok. på plast"))
+                    return MapMaterial.FotokopiPlast;
+
+                if (material.ToLower().Contains("kopi"))
+                {
+                    if (material.ToLower().Contains("foto") || material.ToLower().Contains("papir"))
+                        return MapMaterial.Fotokopi;
+
+                    if (material.ToLower().Contains("lys"))
+                        return MapMaterial.Lyskopi;
+                }
+
+                if (material.ToLower().Contains("ohp"))
+                {
+                    if (material.ToLower().Contains("transparent"))
+                        return MapMaterial.OHPTransparent;
+                    if (material.ToLower().Contains("a4"))
+                        return MapMaterial.OHPA4;
+                    if (material.ToLower().Contains("folie"))
+                        return MapMaterial.OHPFolie;
+                }
+
+                if (material.ToLower().Contains("a4"))
+                    return MapMaterial.A4;
+
+
+                if (material.ToLower().Contains("negativ"))
+                {
+                    if (material.ToLower().Contains("96"))
+                        return MapMaterial.NegativReol96;
+
+                    if (material.ToLower().Contains("97"))
+                        return MapMaterial.NegativReol97;
+                }
+
+                if (material.ToLower().Contains("karton"))
+                {
+                    if (material.ToLower().Contains("82"))
+                        return MapMaterial.KartonBag82A;
+                    if (material.ToLower().Contains("96"))
+                        return MapMaterial.KartonReol96a;
+                    if (material.ToLower().Contains("97"))
+                        return MapMaterial.KartonReol97;
+                    if (material.ToLower().Contains("oplæbet"))
+                        return MapMaterial.KartonOpklaebet;
+                    if (material.ToLower().Contains("kortskab"))
+                        return MapMaterial.KartonKortskab;
+
+                    return MapMaterial.Karton;
+                }
+
+                if (material.ToLower().Contains("hylde"))
+                    return MapMaterial.HyldeLoft85;
+
+                if (material.ToLower().Contains("96"))
+                    return MapMaterial.KartonReol96a;
+
+                if (material.ToLower().Contains("97"))
+                    return MapMaterial.KartonReol97;
+
+                if (material.ToLower().Contains("luftfoto bag 82"))
+                    return MapMaterial.LuftfotoBag82;
+
+                if (material.ToLower().Contains("82"))
+                    return MapMaterial.KartonBag82A;
+
+                if (material.ToLower().Contains("litografi"))
+                    return MapMaterial.FotoLitografi;
+
+                if (material.ToLower().Contains("lærred"))
+                    return MapMaterial.Kortlærred;
+
+                if (material.ToLower().Contains("tryk"))
+                {
+                    if (material.ToLower().Contains("lys"))
+                        return MapMaterial.Lystryk;
+
+                    if (material.ToLower().Contains("farve"))
+                        return MapMaterial.Farvetryk;
+                }
+
+                if (material.ToLower().Contains("gram"))
+                    return MapMaterial.Fotogrametrisk;
+
+                if (material.ToLower().Contains("prod"))
+                    return MapMaterial.Farvereprodukt;
+
+                if (material.ToLower().Contains("klæb"))
+                    return MapMaterial.Opklæbet;
+
+                if (material.ToLower().Contains("trans"))
+                    return MapMaterial.Transparent;
+
+                if (material.ToLower().Contains("99"))
+                {
+                    if (material.ToLower().Contains("skab"))
+                        return MapMaterial.OriginalSkab99;
+
+                    return MapMaterial.OriginalSe99;
+                }
+
+                if (material.ToLower().Contains("planche"))
+                {
+                    if (material.ToLower().Contains("samle"))
+                        return MapMaterial.SamletPlanche;
+
+                    return MapMaterial.planche;
+                }
+
+            if (material.ToLower().Contains("papir"))
+                return MapMaterial.Papir;
+
+
+            if (material.ToLower().Contains("plast"))
+                    return MapMaterial.Plast;
+
+                return MapMaterial.Andet;
         }
 
         private static MapType GetMapType(string korttype)
@@ -642,8 +768,30 @@ namespace DBMigration
 
             int year = DateTime.Today.Year;
 
+            if (string.IsNullOrEmpty(journalnr))
+            {
+                journal =
+                    db.Journals.Where(x => x.JournalNb.Contains(year.ToString()))
+                        .OrderByDescending(x => x.JournalNb)
+                        .First();
+
+                int count = 1;
+                if (journal != null)
+                {
+                    Int32.TryParse(journal.JournalNb.Split('/')[1], out count);
+                    if (count < 1)
+                        count = 1;
+                }
+                journalnr = string.Format("{0}/{1}", year.ToString(), count.ToString().PadLeft(3, '0'));
+
+            }
+
+            if (string.IsNullOrEmpty(journalnr))
+                
+
             if (journalnr != null)
                 year = Int32.Parse(journalnr.Split('/')[0]);
+
 
             journal = new Journal()
             {

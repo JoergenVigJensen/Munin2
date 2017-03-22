@@ -171,6 +171,12 @@ namespace Munin.Web.Controllers
 
             try
             {
+
+                if (model.Journal == null)
+                {
+                    throw new Exception("Der skal vælges en Journal.");
+                }
+
                 using (var db = new MuninDb())
                 {
 
@@ -198,6 +204,7 @@ namespace Munin.Web.Controllers
                     dbModel.Source = model.Source;
                     dbModel.Interviewer = model.Interviewer;
                     dbModel.Copyright = model.Copyright;
+                    dbModel.Journal = journal;
 
                     if (model.SequenceId > 0)
                         db.Entry(dbModel).State = EntityState.Modified;
@@ -257,24 +264,33 @@ namespace Munin.Web.Controllers
                         throw new Exception("Sekevenstypen er skal starte med mindst 2 bogstaver.");
 
                 string preFix = seqNumber.Split('.')[0];
-                int counter = 1;
+                int counter = 0;
+                string[] index;
 
-                var item = db.Sequences.Where(x => x.SequenceNb.ToLower().StartsWith(preFix.ToLower())).OrderByDescending(x => x.
-                SequenceNb).First();
+                var item =
+                    db.Sequences.Where(x => x.SequenceNb.ToLower().StartsWith(preFix.ToLower()))
+                        .OrderByDescending(x => x.
+                            SequenceNb);
 
-                if (item != null)
+                if (item.ToList().Count == 0)
                 {
-                    string[] index = item.SequenceNb.Split('.');
-                    if (index.Length == 2)
+                    index = seqNumber.Split('.');
+                }
+                else
+                {
+                    index = item.First().SequenceNb.Split('.');
+                }
+
+                if (index.Length == 2)
+                {
+                    if (Int32.TryParse(index[1], out counter))
+                        counter++;
+                    else
                     {
-                        if (Int32.TryParse(index[1], out counter))
-                            counter++;
-                        else
-                        {
-                            counter = 1;
-                        }
+                        counter = 1;
                     }
                 }
+
                 return string.Format("{0}.{1}", preFix, counter.ToString().PadLeft(4, '0'));
             }
         }
@@ -287,19 +303,20 @@ namespace Munin.Web.Controllers
                 case SequenceType.LY:
                 case SequenceType.MC:
                 case SequenceType.MC2x:
+                case SequenceType.VoiceRecorder:
                 {
-                    return GetNextIndex("Ly.0001");
+                    return GetNextIndex("Ly.0000");
                     break;
                 }                
                 case SequenceType.VHS:
                 case SequenceType.video:
                 {
-                    return GetNextIndex("Vi.0001");
+                    return GetNextIndex("Vi.000");
                     break;
                 }
                 case SequenceType.DVD:
                 {
-                    return GetNextIndex("Dv.0001");
+                    return GetNextIndex("Dv.0000");
                     break;
                 }
                 case SequenceType.Filmfarve8mm:
@@ -308,12 +325,12 @@ namespace Munin.Web.Controllers
                 case SequenceType.mmSmalfilm95mm:
                 case SequenceType.Superfilm8mm:
                 {
-                    return GetNextIndex("Fi.0001");
+                    return GetNextIndex("Fi.0000");
                     break;
                 }
                 default:
                 {
-                    return GetNextIndex("An.0001");
+                    return GetNextIndex("An.0000");
                     break;
                 }
             }

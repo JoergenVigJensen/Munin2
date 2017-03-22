@@ -1,4 +1,6 @@
-﻿namespace Munin.DAL.Models
+﻿using System.ComponentModel;
+
+namespace Munin.DAL.Models
 {
     public class Map
     {

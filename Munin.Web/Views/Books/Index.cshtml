@@ -32,8 +32,7 @@
                     <tr>
                         <th class="index" order="index"><a href ng-click="sort_by('bookCode')" style="color: #555555;cursor:hand;">Bognummer&nbsp;<i ng-class="selectedCls('bookCode')"></i></a></th>
                         <th class="title" order="title"><a href ng-click="sort_by('title')" style="color: #555555;cursor:hand;">Titel&nbsp;<i ng-class="selectedCls('title')"></i></a></th>
-                        <th class="author" order="author"><a href ng-click="sort_by('author')" style="color: #555555;cursor:hand;">Titel&nbsp;<i ng-class="selectedCls('author')"></i></a></th>
-                        <th class="date" order="date"><a href ng-click="sort_by('dateTime')" style="color: #555555;cursor:hand;">Datering&nbsp;<i ng-class="selectedCls('dateTime')"></i></a></th>
+                        <th class="author" order="author"><a href ng-click="sort_by('author')" style="color: #555555;cursor:hand;">Forfatter&nbsp;<i ng-class="selectedCls('author')"></i></a></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -70,8 +69,8 @@
                 <tbody>
                     <tr ng-repeat="item in items">
                         <td class="col-md-2">{{item.index}}</td>
-                        <td class="col-md-3">{{item.title}}</td>
-                        <td class="col-md-3">{{item.author}}</td>
+                        <td class="col-md-4">{{item.title}}</td>
+                        <td class="col-md-4">{{item.author}}</td>
                         <td class="col-md-1"><a href="/Books/Edit/{{item.id}}"><span title="Rediger" class="btn btn-sm" style="background-color: #5fba7d;color:white"><span class="glyphicon glyphicon-pencil"></span></span></a></td>
                         <td class="col-md-1"><span title="Slet" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></span></td>
                     </tr>

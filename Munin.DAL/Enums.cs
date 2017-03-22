@@ -151,8 +151,6 @@ namespace Munin.DAL
         OriginalSkab99,
         [Description("Papir")]
         Papir,
-        [Description("PapirKopi")]
-        Papirkopi,
         [Description("Planche")]
         planche,
         [Description("Plast")]
@@ -162,7 +160,10 @@ namespace Munin.DAL
         [Description("Samlet Planche")]
         SamletPlanche,
         [Description("TransParent")]
-        Transparent
+        Transparent,
+        [Description("Andet")]
+        Andet
+
     }
 
     public enum SequenceType
