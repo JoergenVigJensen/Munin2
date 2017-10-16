@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Munin.DAL", "Munin.DAL\Munin.DAL.csproj", "{5E3A07C7-8935-4E6B-B205-316BEC4FD443}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBMigration", "DBMigration\DBMigration.csproj", "{FC2C2ECE-1240-4692-B450-09B42FD795C7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Munin.Web", "Munin.Web\Munin.Web.csproj", "{C189820C-0CD7-4077-ACE8-497D62240E1C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Munin.DAL.SQLite", "Munin.DAL.SQLite\Munin.DAL.SQLite.csproj", "{9C01CCA1-712D-40BE-A96A-68C03979AE94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,8 +35,15 @@ Global
 		{C189820C-0CD7-4077-ACE8-497D62240E1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C189820C-0CD7-4077-ACE8-497D62240E1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C189820C-0CD7-4077-ACE8-497D62240E1C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C01CCA1-712D-40BE-A96A-68C03979AE94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C01CCA1-712D-40BE-A96A-68C03979AE94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C01CCA1-712D-40BE-A96A-68C03979AE94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C01CCA1-712D-40BE-A96A-68C03979AE94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {16C712E5-55F4-4312-87F1-45BB85DCAEC4}
 	EndGlobalSection
 EndGlobal
