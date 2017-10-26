@@ -12,12 +12,14 @@ using Munin.DAL;
 using Munin.DAL.Models;
 using Munin.Web.ViewModels;
 using Newtonsoft.Json;
+using Munin.DAL.SQLite;
 
 namespace Munin.Web.Controllers
 {
     public class MapsController : Controller
     {
-        private MuninDb db = new MuninDb();
+        private MuninLiteContext db = new MuninLiteContext();
+        //private MuninDb db = new MuninDb();
 
         // GET: Maps
         public ActionResult Index()
@@ -118,57 +120,53 @@ namespace Munin.Web.Controllers
             MapVm vm = new MapVm();
             try
             {
-                using (MuninDb db = new MuninDb())
+                vm.JournalList =
+                    db.Journals.Where(x => x.JournalNb != null).Select(x => new UISelectItem() { Value = x.JournalId, Text = x.JournalNb }).ToList();
+
+                vm.MaterialList = Utils.SelectListOf<MapMaterial>();
+                vm.MapTypes = Utils.SelectListOf<MapType>();
+
+                vm.Model = new Map();
+
+                if (id > 0)
                 {
-                    vm.JournalList =
-                        db.Journals.Where(x => x.JournalNb != null).Select(x => new UISelectItem() { Value = x.JournalId, Text = x.JournalNb }).ToList();
-
-                    vm.MaterialList = Utils.SelectListOf<MapMaterial>();
-                    vm.MapTypes = Utils.SelectListOf<MapType>();
-
-                    vm.Model = new Map();
-
-                    if (id > 0)
+                    var map = await db.Maps
+                        .Include(x => x.Journal)
+                        .FirstOrDefaultAsync(x => x.MapId == id);
+                    if (map != null)
                     {
-                        var map = await db.Maps
-                            .Include(x => x.Journal)
-                            .FirstOrDefaultAsync(x => x.MapId == id);
-                        if (map != null)
-                        {
-                            vm.Model.MapId = map.MapId;
-                            vm.Model.MapNb = map.MapNb;
-                            vm.Model.Journal = map.Journal;
-                            vm.Model.Area = map.Area;
-                            vm.Model.PublishYear = map.PublishYear;
-                            vm.Model.Publisher = map.Publisher;
-                            vm.Model.Depot = map.Depot;
-                            vm.Model.Title = map.Title;
-                            vm.Model.Format = map.Format;
-                            vm.Model.MapType = map.MapType;
-                            vm.Model.Proportion = map.Proportion;
-                            vm.Model.Material = map.Material;
-                            vm.Model.Comment = map.Comment;
-                        }
+                        vm.Model.MapId = map.MapId;
+                        vm.Model.MapNb = map.MapNb;
+                        vm.Model.Journal = map.Journal;
+                        vm.Model.Area = map.Area;
+                        vm.Model.PublishYear = map.PublishYear;
+                        vm.Model.Publisher = map.Publisher;
+                        vm.Model.Depot = map.Depot;
+                        vm.Model.Title = map.Title;
+                        vm.Model.Format = map.Format;
+                        vm.Model.MapType = map.MapType;
+                        vm.Model.Proportion = map.Proportion;
+                        vm.Model.Material = map.Material;
+                        vm.Model.Comment = map.Comment;
                     }
-                    else
-                    {
-                        var mapIndex = db.Maps.OrderByDescending(x => x.MapNb).First().MapNb;
-                        string indexCount = mapIndex.Split('.')[1];
-                        string indexNumber = "";
-                        for (int i = 0; i < indexCount.Length; i++)
-                        {
-                            if ("0123456789".IndexOf(indexCount[i]) < 0)
-                                indexNumber += indexCount[i];
-                        }
-                        int bindex = Int32.Parse(indexNumber);
-                        bindex++;
-                        vm.Model.MapNb = "K." + bindex.ToString().PadLeft(4, '0');
-                    }
-
-                    var result = JsonConvert.SerializeObject(vm, Utils.JsonSettings());
-                    return Content(result);
-
                 }
+                else
+                {
+                    var mapIndex = db.Maps.OrderByDescending(x => x.MapNb).First().MapNb;
+                    string indexCount = mapIndex.Split('.')[1];
+                    string indexNumber = "";
+                    for (int i = 0; i < indexCount.Length; i++)
+                    {
+                        if ("0123456789".IndexOf(indexCount[i]) < 0)
+                            indexNumber += indexCount[i];
+                    }
+                    int bindex = Int32.Parse(indexNumber);
+                    bindex++;
+                    vm.Model.MapNb = "K." + bindex.ToString().PadLeft(4, '0');
+                }
+
+                var result = JsonConvert.SerializeObject(vm, Utils.JsonSettings());
+                return Content(result);
             }
             catch (Exception ex)
             {

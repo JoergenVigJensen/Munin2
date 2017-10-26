@@ -8,12 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using Munin.DAL;
 using Munin.DAL.Models;
+using Munin.DAL.SQLite;
 
 namespace Munin.Web.Controllers
 {
     public class JournalsController : Controller
     {
-        private MuninDb db = new MuninDb();
+        //private MuninDb db = new MuninDb();
+        private MuninLiteContext db = new MuninLiteContext();
 
         // GET: Journals
         public ActionResult Index()

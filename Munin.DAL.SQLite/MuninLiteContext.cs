@@ -1,20 +1,21 @@
 ﻿using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
-using Munin.DAL.SQLite.Models;
+using System.Data.SQLite;
+using Munin.DAL.Models;
+
 
 namespace Munin.DAL.SQLite
 {
     public class MuninLiteContext : DbContext
     {
-        public DatabaseContext() :
-            base(new SQLiteConnection() { ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = "D:\\Databases\\SQLiteWithEF.db", ForeignKeys = true }.ConnectionString     }, true)
+        public MuninLiteContext() : base(new SQLiteConnection() { ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = "C:\\Download\\MuninDb.db", ForeignKeys = true }.ConnectionString  }, true)
         {
+
         }
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            base.OnModelCreating(modelBuilder);
-        }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        //    base.OnModelCreating(modelBuilder);
+        //}
 
         public DbSet<Archive> Archives { get; set; }
 

@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Data.Entity;
 using System.Linq;
 using System.IO;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Munin.DAL;
 using Munin.DAL.Models;
 using ILABDb.DAL;
+using System.Data.Entity;
 
 namespace DBMigration
 {
@@ -31,7 +30,6 @@ namespace DBMigration
 
         static void Main(string[] args)
         {
-            bool running = false;
 
             Archive ar = new Archive();
 
@@ -524,7 +522,7 @@ namespace DBMigration
                         ArchiveDocument doc = new ArchiveDocument()
                         {
                             Journal = journal,
-                            AriArchive = archive,
+                            Archive = archive,
                             Copyright = item.Klausul,
                             Signature = item.Signatur,
                             Cover = GetCover(item.Omfang)

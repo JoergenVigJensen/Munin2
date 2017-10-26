@@ -12,12 +12,14 @@ using Munin.DAL;
 using Munin.DAL.Models;
 using Munin.Web.ViewModels;
 using Newtonsoft.Json;
+using Munin.DAL.SQLite;
 
 namespace Munin.Web.Controllers
 {
     public class SequencesController : Controller
     {
-        private MuninDb db = new MuninDb();
+        private MuninLiteContext db = new MuninLiteContext();
+        //private MuninDb db = new MuninDb();
 
         // GET: Sequences
         public ActionResult Index()
@@ -112,8 +114,6 @@ namespace Munin.Web.Controllers
             SequenceVm vm = new SequenceVm();
             try
             {
-                using (MuninDb db = new MuninDb())
-                {
                     vm.JournalList =
                         db.Journals.Where(x => x.JournalNb != null)
                             .Select(x => new UISelectItem() {Value = x.JournalId, Text = x.JournalNb})
@@ -150,8 +150,6 @@ namespace Munin.Web.Controllers
 
                     var result = JsonConvert.SerializeObject(vm, Utils.JsonSettings());
                     return Content(result);
-
-                }
             }
             catch (Exception ex)
             {
@@ -306,18 +304,15 @@ namespace Munin.Web.Controllers
                 case SequenceType.VoiceRecorder:
                 {
                     return GetNextIndex("Ly.0000");
-                    break;
                 }                
                 case SequenceType.VHS:
                 case SequenceType.video:
                 {
                     return GetNextIndex("Vi.000");
-                    break;
                 }
                 case SequenceType.DVD:
                 {
                     return GetNextIndex("Dv.0000");
-                    break;
                 }
                 case SequenceType.Filmfarve8mm:
                 case SequenceType.SmalfilmSH8mm:
@@ -326,12 +321,10 @@ namespace Munin.Web.Controllers
                 case SequenceType.Superfilm8mm:
                 {
                     return GetNextIndex("Fi.0000");
-                    break;
                 }
                 default:
                 {
                     return GetNextIndex("An.0000");
-                    break;
                 }
             }
         }

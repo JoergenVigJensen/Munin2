@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Munin.Web", "Munin.Web\Muni
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Munin.DAL.SQLite", "Munin.DAL.SQLite\Munin.DAL.SQLite.csproj", "{9C01CCA1-712D-40BE-A96A-68C03979AE94}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlLiteCon", "SqlLiteCon\SqlLiteCon.csproj", "{44F81C5E-47AF-4E44-B6F9-2B318143A575}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{9C01CCA1-712D-40BE-A96A-68C03979AE94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C01CCA1-712D-40BE-A96A-68C03979AE94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C01CCA1-712D-40BE-A96A-68C03979AE94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44F81C5E-47AF-4E44-B6F9-2B318143A575}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44F81C5E-47AF-4E44-B6F9-2B318143A575}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44F81C5E-47AF-4E44-B6F9-2B318143A575}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44F81C5E-47AF-4E44-B6F9-2B318143A575}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

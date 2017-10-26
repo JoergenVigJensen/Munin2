@@ -8,12 +8,14 @@ using System.Web;
 using System.Web.Mvc;
 using Munin.DAL;
 using Munin.DAL.Models;
+using Munin.DAL.SQLite;
 
 namespace Munin.Web.Controllers
 {
     public class ChirchRecordsController : Controller
     {
-        private MuninDb db = new MuninDb();
+        private MuninLiteContext db = new MuninLiteContext();
+        //private MuninDb db = new MuninDb();
 
         // GET: ChirchRecords
         public ActionResult Index()

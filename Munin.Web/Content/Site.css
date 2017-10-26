@@ -22,3 +22,10 @@ select,
 textarea {
     max-width: 280px;
 }
+
+#logo {
+    width: 100px;
+    height: 100px;
+    color: #9D9D9D;
+    background: white url(~/Content/Images/logo.png) no-repeat;
+}

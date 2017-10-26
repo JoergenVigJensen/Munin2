@@ -12,12 +12,14 @@ using Munin.DAL;
 using Munin.DAL.Models;
 using Munin.Web.ViewModels;
 using Newtonsoft.Json;
+using Munin.DAL.SQLite;
 
 namespace Munin.Web.Controllers
 {
     public class ClipsController : Controller
     {
-        private MuninDb db = new MuninDb();
+        private MuninLiteContext db = new MuninLiteContext();
+        //private MuninDb db = new MuninDb();
 
         // GET: Clips
         public ActionResult Index()
@@ -128,8 +130,6 @@ namespace Munin.Web.Controllers
             ClipVm vm = new ClipVm();
             try
             {
-                using (MuninDb db = new MuninDb())
-                {
                     vm.Papers = Utils.SelectListOf<PaperEnum>();
                     vm.Model = new Clip();
 
@@ -159,8 +159,6 @@ namespace Munin.Web.Controllers
 
                     var result = JsonConvert.SerializeObject(vm, Utils.JsonSettings());
                     return Content(result);
-
-                }
             }
             catch (Exception ex)
             {

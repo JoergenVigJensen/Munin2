@@ -13,12 +13,14 @@ using Munin.DAL.Models;
 using Munin.Web.ViewModels;
 using Newtonsoft.Json;
 using WebGrease.Css.Extensions;
+using Munin.DAL.SQLite;
 
 namespace Munin.Web.Controllers
 {
     public class PicturesController : Controller
     {
-        private MuninDb db = new MuninDb();
+        private MuninLiteContext db = new MuninLiteContext();
+        //private MuninDb db = new MuninDb();
 
         // GET: Pictures
         public ActionResult Index()
@@ -114,49 +116,45 @@ namespace Munin.Web.Controllers
             PictureVm vm = new PictureVm();
             try
             {
-                using (MuninDb db = new MuninDb())
+                vm.JournalList =
+                    db.Journals.Where(x=>x.JournalNb != null).Select(x => new UISelectItem() {Value = x.JournalId, Text = x.JournalNb}).ToList();
+                vm.MaterialList = Utils.SelectListOf<PictureMaterial>();
+                vm.Model = new Picture();
+
+                if (id > 0)
                 {
-                    vm.JournalList =
-                        db.Journals.Where(x=>x.JournalNb != null).Select(x => new UISelectItem() {Value = x.JournalId, Text = x.JournalNb}).ToList();
-                    vm.MaterialList = Utils.SelectListOf<PictureMaterial>();
-                    vm.Model = new Picture();
-
-                    if (id > 0)
+                    var picture = await db.Pictures
+                        .Include(x=>x.Journal)
+                        .FirstOrDefaultAsync(x => x.PictureId == id);
+                    if (picture != null)
                     {
-                        var picture = await db.Pictures
-                            .Include(x=>x.Journal)
-                            .FirstOrDefaultAsync(x => x.PictureId == id);
-                        if (picture != null)
-                        {
-                            vm.Model.DateTime = picture.DateTime;
-                            vm.Model.PictureId = picture.PictureId;
-                            vm.Model.CDNb = picture.CDNb;
-                            vm.Model.Comment = picture.Comment;
-                            vm.Model.Copyright = picture.Copyright;
-                            vm.Model.Journal = picture.Journal;
-                            vm.Model.Photograph = picture.Photograph;
-                            vm.Model.PictureIndex = picture.PictureIndex;
-                            vm.Model.PictureMaterial = picture.PictureMaterial;
-                            vm.Model.OrderNum = picture.OrderNum;
-                            vm.Model.Tag = picture.Tag;
-                            vm.Model.Provision = picture.Provision;
-                            vm.Model.Size = picture.Size;
-                            vm.Model.Placed = picture.Placed;
-                        }
+                        vm.Model.DateTime = picture.DateTime;
+                        vm.Model.PictureId = picture.PictureId;
+                        vm.Model.CDNb = picture.CDNb;
+                        vm.Model.Comment = picture.Comment;
+                        vm.Model.Copyright = picture.Copyright;
+                        vm.Model.Journal = picture.Journal;
+                        vm.Model.Photograph = picture.Photograph;
+                        vm.Model.PictureIndex = picture.PictureIndex;
+                        vm.Model.PictureMaterial = picture.PictureMaterial;
+                        vm.Model.OrderNum = picture.OrderNum;
+                        vm.Model.Tag = picture.Tag;
+                        vm.Model.Provision = picture.Provision;
+                        vm.Model.Size = picture.Size;
+                        vm.Model.Placed = picture.Placed;
                     }
-                    else
-                    {
-                        var pictureIndex = db.Pictures.OrderByDescending(x => x.PictureIndex).First().PictureIndex;
-                        int bindex = Int32.Parse(pictureIndex.Split('.')[1]);
-                        bindex++;
-                        vm.Model.PictureIndex = "B." + bindex.ToString().PadLeft(4, '0');
-                        vm.Model.DateTime = DateTime.Now.Date;
-                    }
-
-                    var result = JsonConvert.SerializeObject(vm, Utils.JsonSettings());
-                    return Content(result);
-
                 }
+                else
+                {
+                    var pictureIndex = db.Pictures.OrderByDescending(x => x.PictureIndex).First().PictureIndex;
+                    int bindex = Int32.Parse(pictureIndex.Split('.')[1]);
+                    bindex++;
+                    vm.Model.PictureIndex = "B." + bindex.ToString().PadLeft(4, '0');
+                    vm.Model.DateTime = DateTime.Now.Date;
+                }
+
+                var result = JsonConvert.SerializeObject(vm, Utils.JsonSettings());
+                return Content(result);
             }
             catch (Exception ex)
             {

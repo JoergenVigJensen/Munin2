@@ -12,12 +12,14 @@ using Munin.DAL;
 using Munin.DAL.Models;
 using Munin.Web.ViewModels;
 using Newtonsoft.Json;
+using Munin.DAL.SQLite;
 
 namespace Munin.Web.Controllers
 {
     public class BooksController : Controller
     {
-        private MuninDb db = new MuninDb();
+        private MuninLiteContext db = new MuninLiteContext();
+        //private MuninDb db = new MuninDb();
 
         // GET: Books
         public ActionResult Index()
@@ -114,44 +116,40 @@ namespace Munin.Web.Controllers
             BookVm vm = new BookVm();
             try
             {
-                using (MuninDb db = new MuninDb())
+                vm.JournalList =
+                    db.Journals.Where(x => x.JournalNb != null).Select(x => new UISelectItem() { Value = x.JournalId, Text = x.JournalNb }).ToList();
+                vm.Model = new Book();
+
+                if (id > 0)
                 {
-                    vm.JournalList =
-                        db.Journals.Where(x => x.JournalNb != null).Select(x => new UISelectItem() { Value = x.JournalId, Text = x.JournalNb }).ToList();
-                    vm.Model = new Book();
-
-                    if (id > 0)
+                    var book = await db.Books
+                        .Include(x => x.Journal)
+                        .FirstOrDefaultAsync(x => x.BookId == id);
+                    if (book != null)
                     {
-                        var book = await db.Books
-                            .Include(x => x.Journal)
-                            .FirstOrDefaultAsync(x => x.BookId == id);
-                        if (book != null)
-                        {
-                            vm.Model.BookId = book.BookId;
-                            vm.Model.DK5 = book.DK5;
-                            vm.Model.Author = book.Author;
-                            vm.Model.BookCode = book.BookCode;
-                            vm.Model.Editor = book.Editor;
-                            vm.Model.Title = book.Title;
-                            vm.Model.SubTitle = book.SubTitle;
-                            vm.Model.PublishYear = book.PublishYear;
-                            vm.Model.Journal = book.Journal;
-                            vm.Model.Comment = book.Comment;
-                            vm.Model.Tag = book.Tag;
-                        }
+                        vm.Model.BookId = book.BookId;
+                        vm.Model.DK5 = book.DK5;
+                        vm.Model.Author = book.Author;
+                        vm.Model.BookCode = book.BookCode;
+                        vm.Model.Editor = book.Editor;
+                        vm.Model.Title = book.Title;
+                        vm.Model.SubTitle = book.SubTitle;
+                        vm.Model.PublishYear = book.PublishYear;
+                        vm.Model.Journal = book.Journal;
+                        vm.Model.Comment = book.Comment;
+                        vm.Model.Tag = book.Tag;
                     }
-                    else
-                    {
-                        var bookcode = db.Books.OrderByDescending(x => x.BookCode).First().BookCode;
-                        int bindex = Int32.Parse(bookcode.Split('.')[1]);
-                        bindex++;
-                        vm.Model.BookCode = "B." + bindex.ToString().PadLeft(4, '0');
-                    }
-
-                    var result = JsonConvert.SerializeObject(vm, Utils.JsonSettings());
-                    return Content(result);
-
                 }
+                else
+                {
+                    var bookcode = db.Books.OrderByDescending(x => x.BookCode).First().BookCode;
+                    int bindex = Int32.Parse(bookcode.Split('.')[1]);
+                    bindex++;
+                    vm.Model.BookCode = "B." + bindex.ToString().PadLeft(4, '0');
+                }
+
+                var result = JsonConvert.SerializeObject(vm, Utils.JsonSettings());
+                return Content(result);
             }
             catch (Exception ex)
             {
